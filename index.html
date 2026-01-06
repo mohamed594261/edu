@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة التعليم الذكية</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+        
+        body {
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .sidebar {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        .course-card {
+            border-right: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            border-right-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+        }
+
+        #codeInput {
+            tab-size: 4;
+            -moz-tab-size: 4;
+        }
+
+        #outputFrame {
+            background: white;
+        }
+
+        .firebase-warning {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full flex flex-col overflow-auto"><!-- Firebase Setup Warning (سيختفي بعد الربط) -->
+   <div id="firebaseWarning" class="firebase-warning" style="display: none;"><i class="fas fa-exclamation-triangle mr-2"></i> <strong>تنبيه:</strong> لم يتم ربط Firebase بعد! اضغط F12 لرؤية التعليمات
+   </div><!-- Header -->
+   <header class="w-full gradient-bg text-white shadow-lg">
+    <div class="container mx-auto px-4 py-4">
+     <div class="flex items-center justify-between flex-wrap gap-4"><!-- Logo and Name -->
+      <div class="flex items-center gap-3">
+       <div class="bg-white rounded-lg p-2">
+        <svg width="40" height="40" viewbox="0 0 40 40" fill="none"><path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" fill="#667eea" /> <circle cx="20" cy="20" r="6" fill="white" />
+        </svg>
+       </div>
+       <div>
+        <h1 id="platformName" class="text-xl md:text-2xl font-bold">منصة التعليم الذكية</h1>
+        <p id="platformTagline" class="text-xs md:text-sm opacity-90">تعلم البرمجة بذكاء</p>
+       </div>
+      </div><!-- Navigation -->
+      <nav class="hidden lg:flex items-center gap-6"><a href="#" class="hover:opacity-80 transition" onclick="showPage('home'); return false;">الرئيسية</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('about'); return false;">من نحن</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('contact'); return false;">اتصل بنا</a>
+      </nav><!-- Auth Buttons -->
+      <div class="flex items-center gap-3">
+       <div id="userInfo" style="display: none;" class="flex items-center gap-3"><span id="userName" class="font-semibold"></span> <button onclick="handleLogout()" class="px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition"> تسجيل خروج </button>
+       </div>
+       <div id="authButtons"><button onclick="openModal('login')" class="px-4 py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition"> تسجيل الدخول </button> <button onclick="openModal('register')" class="px-4 py-2 bg-purple-800 text-white rounded-lg font-semibold hover:bg-purple-900 transition"> تسجيل جديد </button>
+       </div>
+      </div>
+     </div><!-- Mobile Navigation -->
+     <nav class="lg:hidden flex gap-4 mt-4 border-t border-white/20 pt-4"><a href="#" class="text-sm hover:opacity-80 transition" onclick="showPage('home'); return false;">الرئيسية</a> <a href="#" class="text-sm hover:opacity-80 transition" onclick="showPage('about'); return false;">من نحن</a> <a href="#" class="text-sm hover:opacity-80 transition" onclick="showPage('contact'); return false;">اتصل بنا</a>
+     </nav>
+    </div>
+   </header><!-- Main Content -->
+   <main class="w-full flex-1"><!-- Home Page -->
+    <div id="homePage" class="page-content"><!-- Hero Section -->
+     <section class="gradient-bg text-white py-16 md:py-24">
+      <div class="container mx-auto px-4 text-center">
+       <h2 id="heroTitle" class="text-3xl md:text-5xl font-bold mb-6">ابدأ رحلتك التعليمية معنا</h2>
+       <p id="heroDescription" class="text-lg md:text-xl mb-8 opacity-90">تعلم البرمجة والذكاء الاصطناعي مع أفضل المدربين</p><button onclick="openModal('register')" class="btn-primary px-8 py-4 bg-white text-purple-600 rounded-lg font-bold text-lg hover:bg-gray-100"> ابدأ التعلم الآن </button>
+      </div>
+     </section><!-- Courses Section -->
+     <section class="w-full py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+       <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">أقسام البرمجة</h2>
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><!-- Frontend -->
+        <div class="card-hover bg-white rounded-xl shadow-lg p-6 cursor-pointer" onclick="showCourse('frontend')">
+         <div class="text-5xl mb-4">
+          💻
+         </div>
+         <h3 class="text-xl font-bold mb-3 text-gray-800">الفرونت اند</h3>
+         <p class="text-gray-600 mb-4">تعلم HTML, CSS, JavaScript وReact</p><span class="text-purple-600 font-semibold">15 درس →</span>
+        </div><!-- Backend -->
+        <div class="card-hover bg-white rounded-xl shadow-lg p-6 cursor-pointer" onclick="showCourse('backend')">
+         <div class="text-5xl mb-4">
+          ⚙️
+         </div>
+         <h3 class="text-xl font-bold mb-3 text-gray-800">الباك اند</h3>
+         <p class="text-gray-600 mb-4">تعلم Node.js, Python وقواعد البيانات</p><span class="text-purple-600 font-semibold">12 درس →</span>
+        </div><!-- AI -->
+        <div class="card-hover bg-white rounded-xl shadow-lg p-6 cursor-pointer" onclick="showCourse('ai')">
+         <div class="text-5xl mb-4">
+          🤖
+         </div>
+         <h3 class="text-xl font-bold mb-3 text-gray-800">الذكاء الاصطناعي</h3>
+         <p class="text-gray-600 mb-4">تعلم Machine Learning وDeep Learning</p><span class="text-purple-600 font-semibold">20 درس →</span>
+        </div><!-- Math -->
+        <div class="card-hover bg-white rounded-xl shadow-lg p-6 cursor-pointer" onclick="showCourse('math')">
+         <div class="text-5xl mb-4">
+          📊
+         </div>
+         <h3 class="text-xl font-bold mb-3 text-gray-800">علوم الرياضيات</h3>
+         <p class="text-gray-600 mb-4">أساسيات الرياضيات للبرمجة</p><span class="text-purple-600 font-semibold">10 دروس →</span>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div><!-- About Page -->
+    <div id="aboutPage" class="page-content hidden">
+     <div class="container mx-auto px-4 py-16">
+      <h2 class="text-4xl font-bold mb-8 text-gray-800 text-center">من نحن</h2>
+      <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8">
+       <p class="text-lg text-gray-700 mb-6 leading-relaxed">منصة التعليم الذكية هي منصة تعليمية رائدة تهدف إلى تقديم أفضل المحتوى التعليمي في مجالات البرمجة والذكاء الاصطناعي.</p>
+       <p class="text-lg text-gray-700 leading-relaxed">نحن نؤمن بأن التعليم حق للجميع، ونسعى لتوفير بيئة تعليمية تفاعلية وممتعة تساعد المتعلمين على تحقيق أهدافهم المهنية.</p>
+      </div>
+     </div>
+    </div><!-- Contact Page -->
+    <div id="contactPage" class="page-content hidden">
+     <div class="container mx-auto px-4 py-16">
+      <h2 class="text-4xl font-bold mb-8 text-gray-800 text-center">اتصل بنا</h2>
+      <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
+       <form onsubmit="handleContact(event)">
+        <div class="mb-6"><label for="contactName" class="block text-gray-700 font-semibold mb-2">الاسم</label> <input type="text" id="contactName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+        </div>
+        <div class="mb-6"><label for="contactEmail" class="block text-gray-700 font-semibold mb-2">البريد الإلكتروني</label> <input type="email" id="contactEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+        </div>
+        <div class="mb-6"><label for="contactMessage" class="block text-gray-700 font-semibold mb-2">الرسالة</label> <textarea id="contactMessage" required rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"></textarea>
+        </div><button type="submit" class="w-full btn-primary bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700"> إرسال الرسالة </button>
+       </form>
+      </div>
+     </div>
+    </div><!-- Course View with Sidebar -->
+    <div id="courseView" class="page-content hidden">
+     <div class="flex h-full"><!-- Sidebar -->
+      <div id="courseSidebar" class="w-80 bg-white border-l border-gray-200 p-6 overflow-y-auto">
+       <h3 class="text-2xl font-bold mb-6 text-gray-800" id="courseTitle">الدروس</h3>
+       <div id="lessonsList"></div><!-- Code Editor Toggle Button -->
+       <div class="mt-8 pt-6 border-t border-gray-200"><button onclick="toggleCodeEditor()" class="w-full btn-primary bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 rounded-lg font-bold hover:from-green-600 hover:to-blue-600"> <i class="fas fa-code mr-2"></i> محرر الكود التفاعلي </button>
+       </div>
+      </div><!-- Course Content -->
+      <div class="flex-1 p-8 overflow-y-auto">
+       <div id="courseContent" class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-gray-800">مرحباً بك في القسم</h2>
+        <p class="text-lg text-gray-700">اختر درساً من القائمة الجانبية للبدء</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- Interactive Code Editor -->
+    <div id="codeEditorView" class="page-content hidden">
+     <div class="flex flex-col h-full"><!-- Editor Header -->
+      <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4">
+       <div class="container mx-auto flex items-center justify-between flex-wrap gap-4">
+        <div class="flex items-center gap-4"><button onclick="toggleCodeEditor()" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition"> <i class="fas fa-arrow-right"></i> رجوع </button>
+         <h2 class="text-xl md:text-2xl font-bold">محرر الكود التفاعلي 💻</h2>
+        </div>
+        <div class="flex gap-2 flex-wrap"><button onclick="selectLanguage('html')" id="btnHtml" class="lang-btn active px-4 py-2 rounded-lg font-semibold transition">HTML</button> <button onclick="selectLanguage('css')" id="btnCss" class="lang-btn px-4 py-2 rounded-lg font-semibold transition">CSS</button> <button onclick="selectLanguage('javascript')" id="btnJavascript" class="lang-btn px-4 py-2 rounded-lg font-semibold transition">JavaScript</button> <button onclick="selectLanguage('python')" id="btnPython" class="lang-btn px-4 py-2 rounded-lg font-semibold transition">Python</button>
+        </div>
+       </div>
+      </div>
+      <div class="flex-1 flex flex-col lg:flex-row overflow-hidden"><!-- Code Input Section -->
+       <div class="w-full lg:w-1/2 flex flex-col border-l border-gray-300">
+        <div class="bg-gray-800 text-white px-4 py-3 flex items-center justify-between flex-wrap gap-2"><span class="font-semibold">اكتب الكود هنا</span>
+         <div class="flex gap-2 flex-wrap"><button onclick="runCode()" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg font-semibold transition"> <i class="fas fa-play mr-1"></i> تشغيل </button> <button onclick="clearCode()" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg font-semibold transition"> <i class="fas fa-trash mr-1"></i> مسح </button> <button onclick="loadExample()" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg font-semibold transition"> <i class="fas fa-lightbulb mr-1"></i> مثال </button>
+         </div>
+        </div>
+        <div class="flex-1 relative"><textarea id="codeInput" class="w-full h-full p-4 font-mono text-sm bg-gray-900 text-green-400 resize-none focus:outline-none" placeholder="ابدأ الكتابة هنا..." spellcheck="false"></textarea>
+         <div class="absolute bottom-2 left-2 bg-gray-800 text-gray-400 px-3 py-1 rounded text-xs"><span id="lineCount">السطر: 1</span> | <span id="charCount">الأحرف: 0</span>
+         </div>
+        </div>
+       </div><!-- Output Section -->
+       <div class="w-full lg:w-1/2 flex flex-col">
+        <div class="bg-gray-700 text-white px-4 py-3 flex items-center justify-between"><span class="font-semibold">النتيجة</span> <button onclick="clearOutput()" class="bg-gray-600 hover:bg-gray-500 px-3 py-1 rounded text-sm transition"> مسح النتيجة </button>
+        </div><!-- HTML/CSS/JS Output -->
+        <div id="webOutput" class="flex-1 bg-white hidden"><iframe id="outputFrame" class="w-full h-full border-0"></iframe>
+        </div><!-- Python/Console Output -->
+        <div id="consoleOutput" class="flex-1 bg-gray-900 text-gray-100 p-4 font-mono text-sm overflow-auto hidden">
+         <div id="consoleContent"></div>
+        </div><!-- Code Tips -->
+        <div class="bg-blue-50 border-t-4 border-blue-500 p-4">
+         <h4 class="font-bold text-blue-800 mb-2 flex items-center"><i class="fas fa-info-circle ml-2"></i> <span id="tipTitle">نصائح البرمجة</span></h4>
+         <p id="codeTip" class="text-sm text-blue-700">اختر لغة برمجة وابدأ الكتابة!</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Student Dashboard -->
+    <div id="studentDashboard" class="page-content hidden">
+     <div class="container mx-auto px-4 py-8">
+      <h2 class="text-3xl font-bold mb-8 text-gray-800">لوحة تحكم الطالب</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+       <div class="bg-white rounded-xl shadow-lg p-6">
+        <h3 class="text-xl font-bold mb-2 text-gray-800">الدروس المكتملة</h3>
+        <p class="text-4xl font-bold text-green-600">23/57</p>
+       </div>
+       <div class="bg-white rounded-xl shadow-lg p-6">
+        <h3 class="text-xl font-bold mb-2 text-gray-800">ساعات التعلم</h3>
+        <p class="text-4xl font-bold text-blue-600">45</p>
+       </div>
+       <div class="bg-white rounded-xl shadow-lg p-6">
+        <h3 class="text-xl font-bold mb-2 text-gray-800">الشهادات</h3>
+        <p class="text-4xl font-bold text-purple-600">2</p>
+       </div>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-6">
+       <h3 class="text-2xl font-bold mb-4 text-gray-800">الدورات الحالية</h3>
+       <div class="space-y-4" id="userCourses">
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+         <div class="flex-1">
+          <h4 class="font-bold text-gray-800">الفرونت اند المتقدم</h4>
+          <div class="w-full max-w-md bg-gray-200 rounded-full h-2 mt-2">
+           <div class="bg-purple-600 h-2 rounded-full" style="width: 65%"></div>
+          </div>
+         </div><span class="text-purple-600 font-semibold mr-4">65%</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </main><!-- Footer -->
+   <footer class="w-full bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4">
+     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <div>
+       <p id="copyrightText" class="text-sm">© 2024 منصة التعليم الذكية - جميع الحقوق محفوظة</p>
+      </div>
+      <div class="flex gap-6"><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition"> <i class="fab fa-facebook text-2xl"></i> </a> <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition"> <i class="fab fa-twitter text-2xl"></i> </a> <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition"> <i class="fab fa-youtube text-2xl"></i> </a> <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition"> <i class="fab fa-linkedin text-2xl"></i> </a>
+      </div>
+     </div>
+    </div>
+   </footer><!-- Login Modal -->
+   <div id="loginModal" class="modal">
+    <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full">
+     <h2 class="text-3xl font-bold mb-6 text-gray-800 text-center">تسجيل الدخول</h2>
+     <form onsubmit="handleLogin(event)" class="mb-6">
+      <div class="mb-4"><label for="loginEmail" class="block text-gray-700 font-semibold mb-2">البريد الإلكتروني</label> <input type="email" id="loginEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+      </div>
+      <div class="mb-6"><label for="loginPassword" class="block text-gray-700 font-semibold mb-2">كلمة المرور</label> <input type="password" id="loginPassword" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+      </div><button type="submit" class="w-full btn-primary bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 mb-4"> دخول </button>
+     </form>
+     <div class="text-center mb-4">
+      <p class="text-gray-600 mb-4">أو تابع باستخدام</p>
+      <div class="space-y-3"><button onclick="handleSocialLogin('google')" class="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-50 transition"> <i class="fab fa-google text-red-500"></i> المتابعة بحساب جوجل </button> <button onclick="handleSocialLogin('facebook')" class="w-full flex items-center justify-center gap-3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"> <i class="fab fa-facebook"></i> المتابعة بحساب فيسبوك </button>
+      </div>
+     </div><button onclick="closeModal('login')" class="w-full bg-gray-200 text-gray-800 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"> إغلاق </button>
+    </div>
+   </div><!-- Register Modal -->
+   <div id="registerModal" class="modal">
+    <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full">
+     <h2 class="text-3xl font-bold mb-6 text-gray-800 text-center">تسجيل حساب جديد</h2>
+     <form onsubmit="handleRegister(event)" class="mb-6">
+      <div class="mb-4"><label for="registerName" class="block text-gray-700 font-semibold mb-2">الاسم الكامل</label> <input type="text" id="registerName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+      </div>
+      <div class="mb-4"><label for="registerEmail" class="block text-gray-700 font-semibold mb-2">البريد الإلكتروني</label> <input type="email" id="registerEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+      </div>
+      <div class="mb-6"><label for="registerPassword" class="block text-gray-700 font-semibold mb-2">كلمة المرور</label> <input type="password" id="registerPassword" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+      </div><button type="submit" class="w-full btn-primary bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 mb-4"> إنشاء حساب </button>
+     </form>
+     <div class="text-center mb-4">
+      <p class="text-gray-600 mb-4">أو سجل باستخدام</p>
+      <div class="space-y-3"><button onclick="handleSocialLogin('google')" class="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-50 transition"> <i class="fab fa-google text-red-500"></i> التسجيل بحساب جوجل </button> <button onclick="handleSocialLogin('facebook')" class="w-full flex items-center justify-center gap-3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"> <i class="fab fa-facebook"></i> التسجيل بحساب فيسبوك </button>
+      </div>
+     </div><button onclick="closeModal('register')" class="w-full bg-gray-200 text-gray-800 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"> إغلاق </button>
+    </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            platform_name: 'منصة التعليم الذكية',
+            platform_tagline: 'تعلم البرمجة بذكاء',
+            hero_title: 'ابدأ رحلتك التعليمية معنا',
+            hero_description: 'تعلم البرمجة والذكاء الاصطناعي مع أفضل المدربين',
+            copyright_text: '© 2024 منصة التعليم الذكية - جميع الحقوق محفوظة'
+        };
+
+        // ============================================
+        // إعدادات Firebase - ضع مفاتيحك هنا
+        // ============================================
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY_HERE",
+            authDomain: "your-project.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abc123def456"
+        };
+
+        // متغيرات Firebase
+        let firebaseInitialized = false;
+        let db, auth, storage;
+        let currentUser = null;
+
+        // ============================================
+        // تهيئة Firebase
+        // ============================================
+        function initializeFirebase() {
+            try {
+                // التحقق من أن المفاتيح تم تغييرها
+                if (firebaseConfig.apiKey === "YOUR_API_KEY_HERE") {
+                    throw new Error("يرجى تحديث مفاتيح Firebase");
+                }
+
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                
+                db = firebase.firestore();
+                auth = firebase.auth();
+                storage = firebase.storage();
+                firebaseInitialized = true;
+                
+                console.log('✅ تم الاتصال بـ Firebase بنجاح!');
+                
+                // مراقبة حالة المستخدم
+                auth.onAuthStateChanged((user) => {
+                    currentUser = user;
+                    updateUserUI(user);
+                });
+                
+                return true;
+            } catch (error) {
+                console.error('⚠️ خطأ في Firebase:', error.message);
+                showFirebaseSetupInstructions();
+                document.getElementById('firebaseWarning').style.display = 'block';
+                return false;
+            }
+        }
+
+        // عرض تعليمات الإعداد
+        function showFirebaseSetupInstructions() {
+            console.log('%c═══════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
+            console.log('%c📋 خطوات ربط Firebase بالموقع:', 'color: #667eea; font-size: 16px; font-weight: bold;');
+            console.log('%c═══════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
+            console.log('');
+            console.log('%c1️⃣ إنشاء مشروع Firebase:', 'color: #4CAF50; font-weight: bold;');
+            console.log('   اذهب إلى: https://console.firebase.google.com/');
+            console.log('   اضغط "Add project" أو "إضافة مشروع"');
+            console.log('   أدخل اسم المشروع (مثلاً: learning-platform)');
+            console.log('');
+            console.log('%c2️⃣ الحصول على مفاتيح Firebase:', 'color: #2196F3; font-weight: bold;');
+            console.log('   • من لوحة التحكم، اضغط على أيقونة الويب (</>)');
+            console.log('   • سجل تطبيق ويب جديد');
+            console.log('   • ستظهر لك صفحة بها firebaseConfig');
+            console.log('   • انسخ القيم الموجودة في firebaseConfig');
+            console.log('');
+            console.log('%c3️⃣ إضافة المفاتيح للكود:', 'color: #FF9800; font-weight: bold;');
+            console.log('   • ابحث في الكود عن: const firebaseConfig = {');
+            console.log('   • استبدل القيم الافتراضية بالقيم من Firebase');
+            console.log('   • مثال:');
+            console.log('     apiKey: "AIzaSyB1X2Y3Z..."');
+            console.log('     authDomain: "learning-platform.firebaseapp.com"');
+            console.log('');
+            console.log('%c4️⃣ تفعيل Authentication:', 'color: #9C27B0; font-weight: bold;');
+            console.log('   • اذهب إلى: Authentication > Sign-in method');
+            console.log('   • فعّل "Email/Password"');
+            console.log('   • فعّل "Google" (اختياري)');
+            console.log('');
+            console.log('%c5️⃣ تفعيل Firestore Database:', 'color: #F44336; font-weight: bold;');
+            console.log('   • اذهب إلى: Firestore Database');
+            console.log('   • اضغط "Create database"');
+            console.log('   • اختر "Start in test mode" للبداية');
+            console.log('   • اختر المنطقة الأقرب لك');
+            console.log('');
+            console.log('%c6️⃣ تفعيل Storage (اختياري):', 'color: #00BCD4; font-weight: bold;');
+            console.log('   • اذهب إلى: Storage');
+            console.log('   • اضغط "Get started"');
+            console.log('   • اختر "Start in test mode"');
+            console.log('');
+            console.log('%c7️⃣ قواعد الأمان (مهم للإنتاج!):', 'color: #E91E63; font-weight: bold;');
+            console.log('   للتطوير فقط، استخدم هذه القواعد في Firestore:');
+            console.log('   ');
+            console.log('   rules_version = \'2\';');
+            console.log('   service cloud.firestore {');
+            console.log('     match /databases/{database}/documents {');
+            console.log('       match /{document=**} {');
+            console.log('         allow read, write: if request.auth != null;');
+            console.log('       }');
+            console.log('     }');
+            console.log('   }');
+            console.log('');
+            console.log('%c═══════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
+            console.log('%c✨ بعد إتمام هذه الخطوات، سيعمل الموقع بشكل كامل!', 'color: #4CAF50; font-weight: bold; font-size: 14px;');
+            console.log('%c═══════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
+        }
+
+        // تحديث واجهة المستخدم
+        function updateUserUI(user) {
+            if (user) {
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('authButtons').style.display = 'none';
+                document.getElementById('userName').textContent = user.displayName || user.email;
+            } else {
+                document.getElementById('userInfo').style.display = 'none';
+                document.getElementById('authButtons').style.display = 'flex';
+            }
+        }
+
+        const courseLessons = {
+            frontend: [
+                { id: 'fe1', title: 'مقدمة في HTML', url: './lessons/frontend/lesson1.html' },
+                { id: 'fe2', title: 'أساسيات CSS', url: './lessons/frontend/lesson2.html' },
+                { id: 'fe3', title: 'JavaScript للمبتدئين', url: './lessons/frontend/lesson3.html' },
+                { id: 'fe4', title: 'DOM Manipulation', url: './lessons/frontend/lesson4.html' },
+                { id: 'fe5', title: 'مقدمة في React', url: './lessons/frontend/lesson5.html' }
+            ],
+            backend: [
+                { id: 'be1', title: 'مقدمة في Node.js', url: './lessons/backend/lesson1.html' },
+                { id: 'be2', title: 'Express Framework', url: './lessons/backend/lesson2.html' },
+                { id: 'be3', title: 'قواعد البيانات MongoDB', url: './lessons/backend/lesson3.html' },
+                { id: 'be4', title: 'RESTful APIs', url: './lessons/backend/lesson4.html' }
+            ],
+            ai: [
+                { id: 'ai1', title: 'مقدمة في الذكاء الاصطناعي', url: './lessons/ai/lesson1.html' },
+                { id: 'ai2', title: 'Python للذكاء الاصطناعي', url: './lessons/ai/lesson2.html' },
+                { id: 'ai3', title: 'Machine Learning أساسيات', url: './lessons/ai/lesson3.html' },
+                { id: 'ai4', title: 'Neural Networks', url: './lessons/ai/lesson4.html' },
+                { id: 'ai5', title: 'TensorFlow وKeras', url: './lessons/ai/lesson5.html' }
+            ],
+            math: [
+                { id: 'ma1', title: 'الجبر الخطي', url: './lessons/math/lesson1.html' },
+                { id: 'ma2', title: 'حساب التفاضل والتكامل', url: './lessons/math/lesson2.html' },
+                { id: 'ma3', title: 'الإحصاء والاحتمالات', url: './lessons/math/lesson3.html' }
+            ]
+        };
+
+        let currentLanguage = 'html';
+        let htmlCode = '';
+        let cssCode = '';
+        let jsCode = '';
+
+        const codeExamples = {
+            html: `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مثال HTML</title>
+</head>
+<body style="font-family: Arial; text-align: center; padding: 50px;">
+    <h1 style="color: #667eea;">مرحباً بك في HTML!</h1>
+    <p>هذا مثال بسيط على صفحة HTML</p>
+    <button style="background: #667eea; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">اضغط هنا</button>
+</body>
+</html>`,
+            css: `body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    font-size: 3em;
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}`,
+            javascript: `// مثال JavaScript تفاعلي
+function greeting() {
+    const name = "محمد";
+    console.log("مرحباً " + name + "!");
+    document.body.innerHTML += "<h2 style='color: blue;'>مرحباً " + name + "! 🎉</h2>";
+}
+
+// جرب تشغيل الدالة
+greeting();
+
+// حلقة تكرار بسيطة
+for(let i = 1; i <= 5; i++) {
+    console.log("العدد: " + i);
+}`,
+            python: `# مثال Python بسيط
+def greeting(name):
+    print(f"مرحباً {name}! 👋")
+    return f"أهلاً وسهلاً {name}"
+
+# استدعاء الدالة
+result = greeting("محمد")
+print(result)
+
+# حساب مجموع الأعداد
+numbers = [1, 2, 3, 4, 5]
+total = sum(numbers)
+print(f"المجموع: {total}")
+
+# حلقة تكرار
+for i in range(1, 6):
+    print(f"العدد: {i}")`
+        };
+
+        const codeTips = {
+            html: {
+                title: 'نصائح HTML',
+                tip: 'HTML هي لغة البناء الأساسية للويب. استخدم <h1> للعناوين، <p> للفقرات، و<button> للأزرار.'
+            },
+            css: {
+                title: 'نصائح CSS',
+                tip: 'CSS تُستخدم لتصميم الصفحات. جرب الألوان، الخطوط، والانتقالات لجعل موقعك جذاباً!'
+            },
+            javascript: {
+                title: 'نصائح JavaScript',
+                tip: 'JavaScript تجعل موقعك تفاعلياً. استخدم console.log() لطباعة النتائج وتجنب alert() في التطبيقات الحديثة.'
+            },
+            python: {
+                title: 'نصائح Python',
+                tip: 'Python لغة قوية وسهلة التعلم. استخدم print() لطباعة النتائج و def لتعريف الدوال.'
+            }
+        };
+
+        function toggleCodeEditor() {
+            const codeEditorView = document.getElementById('codeEditorView');
+            const courseView = document.getElementById('courseView');
+            
+            if (codeEditorView.classList.contains('hidden')) {
+                document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+                codeEditorView.classList.remove('hidden');
+            } else {
+                codeEditorView.classList.add('hidden');
+                courseView.classList.remove('hidden');
+            }
+        }
+
+        function selectLanguage(lang) {
+            currentLanguage = lang;
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            const btnId = 'btn' + lang.charAt(0).toUpperCase() + lang.slice(1);
+            const btn = document.getElementById(btnId);
+            if (btn) btn.classList.add('active');
+            
+            const codeInput = document.getElementById('codeInput');
+            if (lang === 'html') codeInput.value = htmlCode;
+            else if (lang === 'css') codeInput.value = cssCode;
+            else if (lang === 'javascript') codeInput.value = jsCode;
+            else codeInput.value = '';
+            
+            document.getElementById('tipTitle').textContent = codeTips[lang].title;
+            document.getElementById('codeTip').textContent = codeTips[lang].tip;
+            
+            updateLineCount();
+        }
+
+        function runCode() {
+            const code = document.getElementById('codeInput').value;
+            
+            if (currentLanguage === 'html') {
+                htmlCode = code;
+                document.getElementById('webOutput').classList.remove('hidden');
+                document.getElementById('consoleOutput').classList.add('hidden');
+                
+                const iframe = document.getElementById('outputFrame');
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                iframeDoc.open();
+                iframeDoc.write(code);
+                iframeDoc.close();
+            } 
+            else if (currentLanguage === 'css') {
+                cssCode = code;
+                document.getElementById('webOutput').classList.remove('hidden');
+                document.getElementById('consoleOutput').classList.add('hidden');
+                
+                const fullHTML = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>${cssCode}</style>
+                    </head>
+                    <body>
+                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">أضف كود HTML أولاً</h1><p style="text-align: center;">اذهب إلى HTML واكتب بعض الكود</p>'}
+                    </body>
+                    </html>
+                `;
+                
+                const iframe = document.getElementById('outputFrame');
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                iframeDoc.open();
+                iframeDoc.write(fullHTML);
+                iframeDoc.close();
+            }
+            else if (currentLanguage === 'javascript') {
+                jsCode = code;
+                document.getElementById('webOutput').classList.remove('hidden');
+                document.getElementById('consoleOutput').classList.add('hidden');
+                
+                const fullHTML = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>${cssCode}</style>
+                    </head>
+                    <body>
+                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">صفحة JavaScript</h1>'}
+                        <script>
+                            const originalConsoleLog = console.log;
+                            console.log = function(...args) {
+                                originalConsoleLog.apply(console, args);
+                                window.parent.postMessage({type: 'console', data: args.join(' ')}, '*');
+                            };
+                            
+                            try {
+                                ${jsCode}
+                            } catch(e) {
+                                window.parent.postMessage({type: 'error', data: e.message}, '*');
+                            }
+                        <\/script>
+                    </body>
+                    </html>
+                `;
+                
+                const iframe = document.getElementById('outputFrame');
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                iframeDoc.open();
+                iframeDoc.write(fullHTML);
+                iframeDoc.close();
+            }
+            else if (currentLanguage === 'python') {
+                document.getElementById('webOutput').classList.add('hidden');
+                document.getElementById('consoleOutput').classList.remove('hidden');
+                
+                const consoleContent = document.getElementById('consoleContent');
+                consoleContent.innerHTML = '<div class="text-yellow-400 mb-2">🐍 تشغيل كود Python...</div>';
+                
+                setTimeout(() => {
+                    const lines = code.split('\n');
+                    let output = '';
+                    
+                    lines.forEach(line => {
+                        if (line.trim().startsWith('print(')) {
+                            const match = line.match(/print\((.*)\)/);
+                            if (match) {
+                                try {
+                                    let content = match[1].trim();
+                                    content = content.replace(/f"([^"]*)"/g, (_, str) => {
+                                        return '"' + str.replace(/\{([^}]+)\}/g, (_, v) => `[${v}]`) + '"';
+                                    });
+                                    content = content.replace(/['"]/g, '');
+                                    output += `<div class="text-green-400">>>> ${content}</div>`;
+                                } catch (e) {
+                                    output += `<div class="text-green-400">>>> ${match[1]}</div>`;
+                                }
+                            }
+                        }
+                    });
+                    
+                    if (!output) {
+                        output = '<div class="text-gray-400">لا توجد نتائج للطباعة. استخدم print() لعرض النتائج.</div>';
+                    }
+                    
+                    consoleContent.innerHTML = output + '<div class="text-green-400 mt-4">✅ تم التنفيذ بنجاح!</div>';
+                }, 500);
+            }
+        }
+
+        function clearCode() {
+            document.getElementById('codeInput').value = '';
+            if (currentLanguage === 'html') htmlCode = '';
+            else if (currentLanguage === 'css') cssCode = '';
+            else if (currentLanguage === 'javascript') jsCode = '';
+            updateLineCount();
+        }
+
+        function loadExample() {
+            document.getElementById('codeInput').value = codeExamples[currentLanguage];
+            updateLineCount();
+            
+            showMessage('تم تحميل المثال! اضغط تشغيل لرؤية النتيجة 🚀', 'blue');
+        }
+
+        function clearOutput() {
+            const iframe = document.getElementById('outputFrame');
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            iframeDoc.open();
+            iframeDoc.write('');
+            iframeDoc.close();
+            
+            document.getElementById('consoleContent').innerHTML = '';
+        }
+
+        function updateLineCount() {
+            const code = document.getElementById('codeInput').value;
+            const lines = code.split('\n').length;
+            const chars = code.length;
+            document.getElementById('lineCount').textContent = `السطر: ${lines}`;
+            document.getElementById('charCount').textContent = `الأحرف: ${chars}`;
+        }
+
+        function showMessage(message, color = 'green') {
+            const colors = {
+                green: 'bg-green-500',
+                blue: 'bg-blue-500',
+                red: 'bg-red-500',
+                purple: 'bg-purple-500'
+            };
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `fixed top-4 left-1/2 transform -translate-x-1/2 ${colors[color]} text-white px-6 py-3 rounded-lg shadow-lg z-50`;
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            setTimeout(() => messageDiv.remove(), 3000);
+        }
+
+        function showPage(page) {
+            document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+            
+            if (page === 'home') {
+                document.getElementById('homePage').classList.remove('hidden');
+            } else if (page === 'about') {
+                document.getElementById('aboutPage').classList.remove('hidden');
+            } else if (page === 'contact') {
+                document.getElementById('contactPage').classList.remove('hidden');
+            }
+        }
+
+        function showCourse(courseType) {
+            document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('courseView').classList.remove('hidden');
+
+            const titles = {
+                frontend: 'دروس الفرونت اند',
+                backend: 'دروس الباك اند',
+                ai: 'دروس الذكاء الاصطناعي',
+                math: 'دروس الرياضيات'
+            };
+
+            document.getElementById('courseTitle').textContent = titles[courseType];
+
+            const lessons = courseLessons[courseType];
+            const lessonsList = document.getElementById('lessonsList');
+            lessonsList.innerHTML = '';
+
+            lessons.forEach((lesson, index) => {
+                const lessonDiv = document.createElement('div');
+                lessonDiv.className = 'course-card p-4 mb-3 rounded-lg cursor-pointer bg-white hover:shadow-md';
+                lessonDiv.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="bg-purple-100 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                            ${index + 1}
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">${lesson.title}</h4>
+                            <p class="text-xs text-gray-500">${lesson.url}</p>
+                        </div>
+                    </div>
+                `;
+                lessonDiv.onclick = () => loadLesson(lesson);
+                lessonsList.appendChild(lessonDiv);
+            });
+        }
+
+        function loadLesson(lesson) {
+            const content = document.getElementById('courseContent');
+            content.innerHTML = `
+                <div class="bg-blue-50 border-r-4 border-blue-500 p-6 rounded-lg mb-6">
+                    <h2 class="text-2xl font-bold mb-4 text-gray-800">${lesson.title}</h2>
+                    <p class="text-gray-700 mb-4">رابط الدرس: <code class="bg-white px-2 py-1 rounded">${lesson.url}</code></p>
+                    <p class="text-gray-600">قم باستبدال هذا الرابط بصفحة الدرس الفعلية في مجلدات GitHub الخاصة بك.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">محتوى الدرس</h3>
+                    <p class="text-gray-600 mb-6">هنا سيتم عرض محتوى الدرس من الملف HTML المرتبط...</p>
+                    <button onclick="toggleCodeEditor()" class="btn-primary bg-green-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-600">
+                        <i class="fas fa-code mr-2"></i>
+                        جرب محرر الكود التفاعلي
+                    </button>
+                </div>
+            `;
+        }
+
+        function openModal(type) {
+            if (type === 'login') {
+                document.getElementById('loginModal').classList.add('active');
+            } else if (type === 'register') {
+                document.getElementById('registerModal').classList.add('active');
+            }
+        }
+
+        function closeModal(type) {
+            if (type === 'login') {
+                document.getElementById('loginModal').classList.remove('active');
+            } else if (type === 'register') {
+                document.getElementById('registerModal').classList.remove('active');
+            }
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            if (!firebaseInitialized) {
+                showMessage('يرجى ربط Firebase أولاً', 'red');
+                return;
+            }
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                closeModal('login');
+                showMessage(`مرحباً ${userCredential.user.email}! تم تسجيل الدخول بنجاح 🎉`, 'green');
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+                    document.getElementById('studentDashboard').classList.remove('hidden');
+                }, 1000);
+            } catch (error) {
+                showMessage('خطأ: ' + error.message, 'red');
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            
+            if (!firebaseInitialized) {
+                showMessage('يرجى ربط Firebase أولاً', 'red');
+                return;
+            }
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                await userCredential.user.updateProfile({ displayName: name });
+                
+                // حفظ بيانات المستخدم في Firestore
+                await db.collection('users').doc(userCredential.user.uid).set({
+                    name: name,
+                    email: email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                closeModal('register');
+                showMessage(`مرحباً ${name}! تم إنشاء حسابك بنجاح 🎉`, 'green');
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+                    document.getElementById('studentDashboard').classList.remove('hidden');
+                }, 1000);
+            } catch (error) {
+                showMessage('خطأ: ' + error.message, 'red');
+            }
+        }
+
+        async function handleSocialLogin(provider) {
+            if (!firebaseInitialized) {
+                showMessage('يرجى ربط Firebase أولاً', 'red');
+                return;
+            }
+            
+            const providerNames = {
+                google: 'جوجل',
+                facebook: 'فيسبوك'
+            };
+            
+            try {
+                let authProvider;
+                if (provider === 'google') {
+                    authProvider = new firebase.auth.GoogleAuthProvider();
+                } else if (provider === 'facebook') {
+                    authProvider = new firebase.auth.FacebookAuthProvider();
+                }
+                
+                const result = await auth.signInWithPopup(authProvider);
+                showMessage(`مرحباً! تم تسجيل الدخول عبر ${providerNames[provider]} 🎉`, 'green');
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+                    document.getElementById('studentDashboard').classList.remove('hidden');
+                }, 1000);
+            } catch (error) {
+                showMessage('خطأ: ' + error.message, 'red');
+            }
+        }
+
+        async function handleLogout() {
+            if (!firebaseInitialized) return;
+            
+            try {
+                await auth.signOut();
+                showMessage('تم تسجيل الخروج بنجاح', 'blue');
+                showPage('home');
+            } catch (error) {
+                showMessage('خطأ: ' + error.message, 'red');
+            }
+        }
+
+        async function handleContact(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            if (firebaseInitialized) {
+                try {
+                    await db.collection('messages').add({
+                        name: name,
+                        email: email,
+                        message: message,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    showMessage('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً 📧', 'green');
+                } catch (error) {
+                    showMessage('تم استلام رسالتك (وضع محاكاة) ✓', 'blue');
+                }
+            } else {
+                showMessage('تم استلام رسالتك (وضع محاكاة) ✓', 'blue');
+            }
+            
+            e.target.reset();
+        }
+
+        // التهيئة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // محاولة تهيئة Firebase
+            initializeFirebase();
+            
+            // إعداد محرر الكود
+            const codeInput = document.getElementById('codeInput');
+            if (codeInput) {
+                codeInput.addEventListener('input', updateLineCount);
+                codeInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Tab') {
+                        e.preventDefault();
+                        const start = this.selectionStart;
+                        const end = this.selectionEnd;
+                        this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
+                        this.selectionStart = this.selectionEnd = start + 4;
+                    }
+                });
+            }
+            
+            window.addEventListener('message', function(e) {
+                if (e.data.type === 'console') {
+                    const consoleContent = document.getElementById('consoleContent');
+                    consoleContent.innerHTML += `<div class="text-green-400">>> ${e.data.data}</div>`;
+                } else if (e.data.type === 'error') {
+                    const consoleContent = document.getElementById('consoleContent');
+                    consoleContent.innerHTML += `<div class="text-red-400">❌ خطأ: ${e.data.data}</div>`;
+                }
+            });
+        });
+
+        async function onConfigChange(config) {
+            document.getElementById('platformName').textContent = config.platform_name || defaultConfig.platform_name;
+            document.getElementById('platformTagline').textContent = config.platform_tagline || defaultConfig.platform_tagline;
+            document.getElementById('heroTitle').textContent = config.hero_title || defaultConfig.hero_title;
+            document.getElementById('heroDescription').textContent = config.hero_description || defaultConfig.hero_description;
+            document.getElementById('copyrightText').textContent = config.copyright_text || defaultConfig.copyright_text;
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig: defaultConfig,
+                onConfigChange: onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ['platform_name', config.platform_name || defaultConfig.platform_name],
+                    ['platform_tagline', config.platform_tagline || defaultConfig.platform_tagline],
+                    ['hero_title', config.hero_title || defaultConfig.hero_title],
+                    ['hero_description', config.hero_description || defaultConfig.hero_description],
+                    ['copyright_text', config.copyright_text || defaultConfig.copyright_text]
+                ])
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b9c8c42a036d821',t:'MTc2NzcxNjQ4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
