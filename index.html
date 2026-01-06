@@ -139,12 +139,12 @@
         <p id="platformTagline" class="text-xs md:text-sm opacity-90">تعلم البرمجة بذكاء</p>
        </div>
       </div><!-- Navigation -->
-      <nav class="hidden lg:flex items-center gap-6"><a href="#" class="hover:opacity-80 transition" onclick="showPage('home'); return false;">الرئيسية</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('about'); return false;">من نحن</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('contact'); return false;">اتصل بنا</a>
+      <nav class="hidden lg:flex items-center gap-6"><a href="#" class="hover:opacity-80 transition" onclick="showPage('home'); return false;">الرئيسية</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('about'); return false;">من ��حن</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('contact'); return false;">اتصل بنا</a>
       </nav><!-- Auth Buttons -->
       <div class="flex items-center gap-3">
        <div id="userInfo" style="display: none;" class="flex items-center gap-3"><span id="userName" class="font-semibold"></span> <button onclick="handleLogout()" class="px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition"> تسجيل خروج </button>
        </div>
-       <div id="authButtons"><button onclick="openModal('login')" class="px-4 py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition"> تسجيل الدخول </button> <button onclick="openModal('register')" class="px-4 py-2 bg-purple-800 text-white rounded-lg font-semibold hover:bg-purple-900 transition"> تسجيل جديد </button>
+       <div id="authButtons"><button onclick="openModal('login')" class="px-4 py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition"> تسجيل ��لدخول </button> <button onclick="openModal('register')" class="px-4 py-2 bg-purple-800 text-white rounded-lg font-semibold hover:bg-purple-900 transition"> تسجيل جديد </button>
        </div>
       </div>
      </div><!-- Mobile Navigation -->
@@ -157,7 +157,7 @@
      <section class="gradient-bg text-white py-16 md:py-24">
       <div class="container mx-auto px-4 text-center">
        <h2 id="heroTitle" class="text-3xl md:text-5xl font-bold mb-6">ابدأ رحلتك التعليمية معنا</h2>
-       <p id="heroDescription" class="text-lg md:text-xl mb-8 opacity-90">تعلم البرمجة والذكاء الاصطناعي مع أفضل المدربين</p><button onclick="openModal('register')" class="btn-primary px-8 py-4 bg-white text-purple-600 rounded-lg font-bold text-lg hover:bg-gray-100"> ابدأ التعلم الآن </button>
+       <p id="heroDescription" class="text-lg md:text-xl mb-8 opacity-90">تعلم البرمجة والذكاء الاصطناعي مع أفضل ��لمدربين</p><button onclick="openModal('register')" class="btn-primary px-8 py-4 bg-white text-purple-600 rounded-lg font-bold text-lg hover:bg-gray-100"> ابدأ التعلم الآن </button>
       </div>
      </section><!-- Courses Section -->
      <section class="w-full py-16 bg-gray-50">
@@ -190,7 +190,7 @@
           📊
          </div>
          <h3 class="text-xl font-bold mb-3 text-gray-800">علوم الرياضيات</h3>
-         <p class="text-gray-600 mb-4">أساسيات الرياضيات للبرمجة</p><span class="text-purple-600 font-semibold">10 دروس →</span>
+         <p class="text-gray-600 mb-4">أساسيا�� الرياضيات للبرمجة</p><span class="text-purple-600 font-semibold">10 دروس →</span>
         </div>
        </div>
       </div>
@@ -322,7 +322,7 @@
     <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full">
      <h2 class="text-3xl font-bold mb-6 text-gray-800 text-center">تسجيل الدخول</h2>
      <form onsubmit="handleLogin(event)" class="mb-6">
-      <div class="mb-4"><label for="loginEmail" class="block text-gray-700 font-semibold mb-2">البريد الإلكتروني</label> <input type="email" id="loginEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+      <div class="mb-4"><label for="loginEmail" class="block text-gray-700 font-semibold mb-2">البري�� الإلكتروني</label> <input type="email" id="loginEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
       </div>
       <div class="mb-6"><label for="loginPassword" class="block text-gray-700 font-semibold mb-2">كلمة المرور</label> <input type="password" id="loginPassword" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
       </div><button type="submit" class="w-full btn-primary bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 mb-4"> دخول </button>
@@ -331,7 +331,7 @@
       <p class="text-gray-600 mb-4">أو تابع باستخدام</p>
       <div class="space-y-3"><button onclick="handleSocialLogin('google')" class="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-50 transition"> <i class="fab fa-google text-red-500"></i> المتابعة بحساب جوجل </button> <button onclick="handleSocialLogin('facebook')" class="w-full flex items-center justify-center gap-3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"> <i class="fab fa-facebook"></i> المتابعة بحساب فيسبوك </button>
       </div>
-     </div><button onclick="closeModal('login')" class="w-full bg-gray-200 text-gray-800 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"> إغلاق </button>
+     </div><button onclick="closeModal('login')" class="w-full bg-gray-200 text-gray-800 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"> ��غلاق </button>
     </div>
    </div><!-- Register Modal -->
    <div id="registerModal" class="modal">
@@ -374,7 +374,6 @@
   appId: "1:257977003914:web:c2bbe4f84fe9e2a230e273",
   measurementId: "G-JQ239795ZK"
 };
-
         // متغيرات Firebase
         let firebaseInitialized = false;
         let db, auth, storage;
@@ -435,7 +434,7 @@
             console.log('');
             console.log('%c3️⃣ إضافة المفاتيح للكود:', 'color: #FF9800; font-weight: bold;');
             console.log('   • ابحث في الكود عن: const firebaseConfig = {');
-            console.log('   • استبدل القيم الافتراضية بالقيم من Firebase');
+            console.log('   • استبدل القي�� الافتراضية بالقيم من Firebase');
             console.log('   • مثال:');
             console.log('     apiKey: "AIzaSyB1X2Y3Z..."');
             console.log('     authDomain: "learning-platform.firebaseapp.com"');
@@ -449,7 +448,7 @@
             console.log('   • اذهب إلى: Firestore Database');
             console.log('   • اضغط "Create database"');
             console.log('   • اختر "Start in test mode" للبداية');
-            console.log('   • اختر المنطقة الأقرب لك');
+            console.log('   • اختر المنطقة الأ��رب لك');
             console.log('');
             console.log('%c6️⃣ تفعيل Storage (اختياري):', 'color: #00BCD4; font-weight: bold;');
             console.log('   • اذهب إلى: Storage');
@@ -468,7 +467,7 @@
             console.log('     }');
             console.log('   }');
             console.log('');
-            console.log('%c═══════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
+            console.log('%c═════��═════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
             console.log('%c✨ بعد إتمام هذه الخطوات، سيعمل الموقع بشكل كامل!', 'color: #4CAF50; font-weight: bold; font-size: 14px;');
             console.log('%c═══════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
         }
@@ -567,11 +566,11 @@ def greeting(name):
     print(f"مرحباً {name}! 👋")
     return f"أهلاً وسهلاً {name}"
 
-# استدعاء الدالة
+# است��عاء الدالة
 result = greeting("محمد")
 print(result)
 
-# حساب مجموع الأعداد
+# حساب مجمو�� الأعداد
 numbers = [1, 2, 3, 4, 5]
 total = sum(numbers)
 print(f"المجموع: {total}")
@@ -596,7 +595,7 @@ for i in range(1, 6):
             },
             python: {
                 title: 'نصائح Python',
-                tip: 'Python لغة قوية وسهلة التعلم. استخدم print() لطباعة النتائج و def لتعريف الدوال.'
+                tip: 'Python لغة قوية و��هلة التعلم. استخدم print() لطباعة النتائج و def لتعريف الدوال.'
             }
         };
 
@@ -659,7 +658,7 @@ for i in range(1, 6):
                         <style>${cssCode}</style>
                     </head>
                     <body>
-                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">أضف كود HTML أولاً</h1><p style="text-align: center;">اذهب إلى HTML واكتب بعض الكود</p>'}
+                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">أضف كود HTML أولاً</h1><p style="text-align: center;">اذهب إلى HTML ��اكتب بعض الكود</p>'}
                     </body>
                     </html>
                 `;
@@ -682,7 +681,7 @@ for i in range(1, 6):
                         <style>${cssCode}</style>
                     </head>
                     <body>
-                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">صفحة JavaScript</h1>'}
+                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">��فحة JavaScript</h1>'}
                         <script>
                             const originalConsoleLog = console.log;
                             console.log = function(...args) {
@@ -774,7 +773,7 @@ for i in range(1, 6):
             const lines = code.split('\n').length;
             const chars = code.length;
             document.getElementById('lineCount').textContent = `السطر: ${lines}`;
-            document.getElementById('charCount').textContent = `الأحرف: ${chars}`;
+            document.getElementById('charCount').textContent = `الأ��رف: ${chars}`;
         }
 
         function showMessage(message, color = 'green') {
@@ -853,13 +852,22 @@ for i in range(1, 6):
                     <p class="text-gray-600 mb-6">هنا سيتم عرض محتوى الدرس من الملف HTML المرتبط...</p>
                     <button onclick="toggleCodeEditor()" class="btn-primary bg-green-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-600">
                         <i class="fas fa-code mr-2"></i>
-                        جرب محرر الكود التفاعلي
+                        جرب محرر الكود التفا��لي
                     </button>
                 </div>
             `;
         }
 
         function openModal(type) {
+            // التحقق من تسجيل الدخول أولاً
+            if (currentUser) {
+                showMessage('أنت مسجل دخول بالفعل! 👤', 'blue');
+                // الانتقال إلى لوحة التحكم
+                document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+                document.getElementById('studentDashboard').classList.remove('hidden');
+                return;
+            }
+            
             if (type === 'login') {
                 document.getElementById('loginModal').classList.add('active');
             } else if (type === 'register') {
@@ -924,7 +932,7 @@ for i in range(1, 6):
                 });
                 
                 closeModal('register');
-                showMessage(`مرحباً ${name}! تم إنشاء حسابك بنجاح 🎉`, 'green');
+                showMessage(`مرحباً ${name}! تم ��نشاء حسابك بنجاح 🎉`, 'green');
                 
                 setTimeout(() => {
                     document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
@@ -955,6 +963,11 @@ for i in range(1, 6):
                 }
                 
                 const result = await auth.signInWithPopup(authProvider);
+                
+                // إغلاق جميع النوافذ المنبثقة
+                closeModal('login');
+                closeModal('register');
+                
                 showMessage(`مرحباً! تم تسجيل الدخول عبر ${providerNames[provider]} 🎉`, 'green');
                 
                 setTimeout(() => {
@@ -1063,6 +1076,5 @@ for i in range(1, 6):
             });
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b9c8c42a036d821',t:'MTc2NzcxNjQ4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b9d13589273d821',t:'MTc2NzcyMjAxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
