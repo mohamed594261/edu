@@ -118,6 +118,26 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.8; }
         }
+
+        .prose {
+            max-width: 100%;
+        }
+
+        .prose h3 {
+            margin-bottom: 1rem;
+        }
+
+        .prose h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .prose ul {
+            margin: 0.5rem 0;
+        }
+
+        .prose pre {
+            margin: 1rem 0;
+        }
     </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -139,12 +159,12 @@
         <p id="platformTagline" class="text-xs md:text-sm opacity-90">تعلم البرمجة بذكاء</p>
        </div>
       </div><!-- Navigation -->
-      <nav class="hidden lg:flex items-center gap-6"><a href="#" class="hover:opacity-80 transition" onclick="showPage('home'); return false;">الرئيسية</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('about'); return false;">من ��حن</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('contact'); return false;">اتصل بنا</a>
+      <nav class="hidden lg:flex items-center gap-6"><a href="#" class="hover:opacity-80 transition" onclick="showPage('home'); return false;">الرئيسية</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('about'); return false;">من نحن</a> <a href="#" class="hover:opacity-80 transition" onclick="showPage('contact'); return false;">اتصل بنا</a>
       </nav><!-- Auth Buttons -->
       <div class="flex items-center gap-3">
        <div id="userInfo" style="display: none;" class="flex items-center gap-3"><span id="userName" class="font-semibold"></span> <button onclick="handleLogout()" class="px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition"> تسجيل خروج </button>
        </div>
-       <div id="authButtons"><button onclick="openModal('login')" class="px-4 py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition"> تسجيل ��لدخول </button> <button onclick="openModal('register')" class="px-4 py-2 bg-purple-800 text-white rounded-lg font-semibold hover:bg-purple-900 transition"> تسجيل جديد </button>
+       <div id="authButtons"><button onclick="openModal('login')" class="px-4 py-2 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition"> تسجيل الدخول </button> <button onclick="openModal('register')" class="px-4 py-2 bg-purple-800 text-white rounded-lg font-semibold hover:bg-purple-900 transition"> تسجيل جديد </button>
        </div>
       </div>
      </div><!-- Mobile Navigation -->
@@ -157,7 +177,7 @@
      <section class="gradient-bg text-white py-16 md:py-24">
       <div class="container mx-auto px-4 text-center">
        <h2 id="heroTitle" class="text-3xl md:text-5xl font-bold mb-6">ابدأ رحلتك التعليمية معنا</h2>
-       <p id="heroDescription" class="text-lg md:text-xl mb-8 opacity-90">تعلم البرمجة والذكاء الاصطناعي مع أفضل ��لمدربين</p><button onclick="openModal('register')" class="btn-primary px-8 py-4 bg-white text-purple-600 rounded-lg font-bold text-lg hover:bg-gray-100"> ابدأ التعلم الآن </button>
+       <p id="heroDescription" class="text-lg md:text-xl mb-8 opacity-90">تعلم البرمجة والذكاء الاصطناعي مع أفضل المدربين</p><button onclick="openModal('register')" class="btn-primary px-8 py-4 bg-white text-purple-600 rounded-lg font-bold text-lg hover:bg-gray-100"> ابدأ التعلم الآن </button>
       </div>
      </section><!-- Courses Section -->
      <section class="w-full py-16 bg-gray-50">
@@ -190,7 +210,7 @@
           📊
          </div>
          <h3 class="text-xl font-bold mb-3 text-gray-800">علوم الرياضيات</h3>
-         <p class="text-gray-600 mb-4">أساسيا�� الرياضيات للبرمجة</p><span class="text-purple-600 font-semibold">10 دروس →</span>
+         <p class="text-gray-600 mb-4">أساسيات الرياضيات للبرمجة</p><span class="text-purple-600 font-semibold">10 دروس →</span>
         </div>
        </div>
       </div>
@@ -322,7 +342,7 @@
     <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full">
      <h2 class="text-3xl font-bold mb-6 text-gray-800 text-center">تسجيل الدخول</h2>
      <form onsubmit="handleLogin(event)" class="mb-6">
-      <div class="mb-4"><label for="loginEmail" class="block text-gray-700 font-semibold mb-2">البري�� الإلكتروني</label> <input type="email" id="loginEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+      <div class="mb-4"><label for="loginEmail" class="block text-gray-700 font-semibold mb-2">البريد الإلكتروني</label> <input type="email" id="loginEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
       </div>
       <div class="mb-6"><label for="loginPassword" class="block text-gray-700 font-semibold mb-2">كلمة المرور</label> <input type="password" id="loginPassword" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
       </div><button type="submit" class="w-full btn-primary bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700 mb-4"> دخول </button>
@@ -331,7 +351,7 @@
       <p class="text-gray-600 mb-4">أو تابع باستخدام</p>
       <div class="space-y-3"><button onclick="handleSocialLogin('google')" class="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-300 py-3 rounded-lg font-semibold hover:bg-gray-50 transition"> <i class="fab fa-google text-red-500"></i> المتابعة بحساب جوجل </button> <button onclick="handleSocialLogin('facebook')" class="w-full flex items-center justify-center gap-3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"> <i class="fab fa-facebook"></i> المتابعة بحساب فيسبوك </button>
       </div>
-     </div><button onclick="closeModal('login')" class="w-full bg-gray-200 text-gray-800 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"> ��غلاق </button>
+     </div><button onclick="closeModal('login')" class="w-full bg-gray-200 text-gray-800 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"> إغلاق </button>
     </div>
    </div><!-- Register Modal -->
    <div id="registerModal" class="modal">
@@ -417,9 +437,9 @@
 
         // عرض تعليمات الإعداد
         function showFirebaseSetupInstructions() {
-            console.log('%c═══════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
+            console.log('%c══════════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
             console.log('%c📋 خطوات ربط Firebase بالموقع:', 'color: #667eea; font-size: 16px; font-weight: bold;');
-            console.log('%c═══════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
+            console.log('%c══════════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
             console.log('');
             console.log('%c1️⃣ إنشاء مشروع Firebase:', 'color: #4CAF50; font-weight: bold;');
             console.log('   اذهب إلى: https://console.firebase.google.com/');
@@ -434,7 +454,7 @@
             console.log('');
             console.log('%c3️⃣ إضافة المفاتيح للكود:', 'color: #FF9800; font-weight: bold;');
             console.log('   • ابحث في الكود عن: const firebaseConfig = {');
-            console.log('   • استبدل القي�� الافتراضية بالقيم من Firebase');
+            console.log('   • استبدل القيم الافتراضية بالقيم من Firebase');
             console.log('   • مثال:');
             console.log('     apiKey: "AIzaSyB1X2Y3Z..."');
             console.log('     authDomain: "learning-platform.firebaseapp.com"');
@@ -448,7 +468,7 @@
             console.log('   • اذهب إلى: Firestore Database');
             console.log('   • اضغط "Create database"');
             console.log('   • اختر "Start in test mode" للبداية');
-            console.log('   • اختر المنطقة الأ��رب لك');
+            console.log('   • اختر المنطقة الأقرب لك');
             console.log('');
             console.log('%c6️⃣ تفعيل Storage (اختياري):', 'color: #00BCD4; font-weight: bold;');
             console.log('   • اذهب إلى: Storage');
@@ -467,9 +487,9 @@
             console.log('     }');
             console.log('   }');
             console.log('');
-            console.log('%c═════��═════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
+            console.log('%c══════════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
             console.log('%c✨ بعد إتمام هذه الخطوات، سيعمل الموقع بشكل كامل!', 'color: #4CAF50; font-weight: bold; font-size: 14px;');
-            console.log('%c═══════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
+            console.log('%c══════════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
         }
 
         // تحديث واجهة المستخدم
@@ -486,29 +506,29 @@
 
         const courseLessons = {
             frontend: [
-                { id: 'fe1', title: 'مقدمة في HTML', url: './lessons/frontend/lesson1.html' },
-                { id: 'fe2', title: 'أساسيات CSS', url: './lessons/frontend/lesson2.html' },
-                { id: 'fe3', title: 'JavaScript للمبتدئين', url: './lessons/frontend/lesson3.html' },
-                { id: 'fe4', title: 'DOM Manipulation', url: './lessons/frontend/lesson4.html' },
-                { id: 'fe5', title: 'مقدمة في React', url: './lessons/frontend/lesson5.html' }
+                { id: 'fe1', title: 'مقدمة في HTML' },
+                { id: 'fe2', title: 'أساسيات CSS' },
+                { id: 'fe3', title: 'JavaScript للمبتدئين' },
+                { id: 'fe4', title: 'DOM Manipulation' },
+                { id: 'fe5', title: 'مقدمة في React' }
             ],
             backend: [
-                { id: 'be1', title: 'مقدمة في Node.js', url: './lessons/backend/lesson1.html' },
-                { id: 'be2', title: 'Express Framework', url: './lessons/backend/lesson2.html' },
-                { id: 'be3', title: 'قواعد البيانات MongoDB', url: './lessons/backend/lesson3.html' },
-                { id: 'be4', title: 'RESTful APIs', url: './lessons/backend/lesson4.html' }
+                { id: 'be1', title: 'مقدمة في Node.js' },
+                { id: 'be2', title: 'Express Framework' },
+                { id: 'be3', title: 'قواعد البيانات MongoDB' },
+                { id: 'be4', title: 'RESTful APIs' }
             ],
             ai: [
-                { id: 'ai1', title: 'مقدمة في الذكاء الاصطناعي', url: './lessons/ai/lesson1.html' },
-                { id: 'ai2', title: 'Python للذكاء الاصطناعي', url: './lessons/ai/lesson2.html' },
-                { id: 'ai3', title: 'Machine Learning أساسيات', url: './lessons/ai/lesson3.html' },
-                { id: 'ai4', title: 'Neural Networks', url: './lessons/ai/lesson4.html' },
-                { id: 'ai5', title: 'TensorFlow وKeras', url: './lessons/ai/lesson5.html' }
+                { id: 'ai1', title: 'مقدمة في الذكاء الاصطناعي' },
+                { id: 'ai2', title: 'Python للذكاء الاصطناعي' },
+                { id: 'ai3', title: 'Machine Learning أساسيات' },
+                { id: 'ai4', title: 'Neural Networks' },
+                { id: 'ai5', title: 'TensorFlow وKeras' }
             ],
             math: [
-                { id: 'ma1', title: 'الأعداد للصف الأول الابتدائي', url: './edu/courses/maths/lesson1.html' },
-                { id: 'ma2', title: 'حساب التفاضل والتكامل', url: './lessons/math/lesson2.html' },
-                { id: 'ma3', title: 'الإحصاء والاحتمالات', url: './lessons/math/lesson3.html' }
+                { id: 'ma1', title: 'الجبر الخطي' },
+                { id: 'ma2', title: 'حساب التفاضل والتكامل' },
+                { id: 'ma3', title: 'الإحصاء والاحتمالات' }
             ]
         };
 
@@ -566,11 +586,11 @@ def greeting(name):
     print(f"مرحباً {name}! 👋")
     return f"أهلاً وسهلاً {name}"
 
-# است��عاء الدالة
+# استدعاء الدالة
 result = greeting("محمد")
 print(result)
 
-# حساب مجمو�� الأعداد
+# حساب مجموع الأعداد
 numbers = [1, 2, 3, 4, 5]
 total = sum(numbers)
 print(f"المجموع: {total}")
@@ -595,7 +615,7 @@ for i in range(1, 6):
             },
             python: {
                 title: 'نصائح Python',
-                tip: 'Python لغة قوية و��هلة التعلم. استخدم print() لطباعة النتائج و def لتعريف الدوال.'
+                tip: 'Python لغة قوية وسهلة التعلم. استخدم print() لطباعة النتائج و def لتعريف الدوال.'
             }
         };
 
@@ -658,7 +678,7 @@ for i in range(1, 6):
                         <style>${cssCode}</style>
                     </head>
                     <body>
-                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">أضف كود HTML أولاً</h1><p style="text-align: center;">اذهب إلى HTML ��اكتب بعض الكود</p>'}
+                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">أضف كود HTML أولاً</h1><p style="text-align: center;">اذهب إلى HTML واكتب بعض الكود</p>'}
                     </body>
                     </html>
                 `;
@@ -681,7 +701,7 @@ for i in range(1, 6):
                         <style>${cssCode}</style>
                     </head>
                     <body>
-                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">��فحة JavaScript</h1>'}
+                        ${htmlCode || '<h1 style="padding: 50px; text-align: center;">صفحة JavaScript</h1>'}
                         <script>
                             const originalConsoleLog = console.log;
                             console.log = function(...args) {
@@ -710,7 +730,7 @@ for i in range(1, 6):
                 document.getElementById('consoleOutput').classList.remove('hidden');
                 
                 const consoleContent = document.getElementById('consoleContent');
-                consoleContent.innerHTML = '<div class="text-yellow-400 mb-2">🐍 تشغيل كود Python...</div>';
+                consoleContent.innerHTML = '<div class="text-yellow-400 mb-2">جاري تشغيل كود Python...</div>';
                 
                 setTimeout(() => {
                     const lines = code.split('\n');
@@ -773,7 +793,7 @@ for i in range(1, 6):
             const lines = code.split('\n').length;
             const chars = code.length;
             document.getElementById('lineCount').textContent = `السطر: ${lines}`;
-            document.getElementById('charCount').textContent = `الأ��رف: ${chars}`;
+            document.getElementById('charCount').textContent = `الأحرف: ${chars}`;
         }
 
         function showMessage(message, color = 'green') {
@@ -830,7 +850,6 @@ for i in range(1, 6):
                         </div>
                         <div>
                             <h4 class="font-semibold text-gray-800">${lesson.title}</h4>
-                            <p class="text-xs text-gray-500">${lesson.url}</p>
                         </div>
                     </div>
                 `;
@@ -841,21 +860,402 @@ for i in range(1, 6):
 
         function loadLesson(lesson) {
             const content = document.getElementById('courseContent');
+            
+            // محتوى تجريبي للدروس
+            const lessonContent = getLessonContent(lesson.id);
+            
             content.innerHTML = `
-                <div class="bg-blue-50 border-r-4 border-blue-500 p-6 rounded-lg mb-6">
-                    <h2 class="text-2xl font-bold mb-4 text-gray-800">${lesson.title}</h2>
-                    <p class="text-gray-700 mb-4">رابط الدرس: <code class="bg-white px-2 py-1 rounded">${lesson.url}</code></p>
-                    <p class="text-gray-600">قم باستبدال هذا الرابط بصفحة الدرس الفعلية في مجلدات GitHub الخاصة بك.</p>
+                <div class="bg-gradient-to-r from-purple-50 to-blue-50 border-r-4 border-purple-500 p-6 rounded-lg mb-6 shadow-lg">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-purple-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
+                            ${lesson.id.match(/\d+/)[0]}
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-800">${lesson.title}</h2>
+                    </div>
+                    <p class="text-gray-600 flex items-center gap-2">
+                        <i class="fas fa-book-open text-purple-600"></i>
+                        <span>الآن تشاهد: ${lesson.title}</span>
+                    </p>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                    <h3 class="text-xl font-bold mb-4 text-gray-800">محتوى الدرس</h3>
-                    <p class="text-gray-600 mb-6">هنا سيتم عرض محتوى الدرس من الملف HTML المرتبط...</p>
-                    <button onclick="toggleCodeEditor()" class="btn-primary bg-green-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-600">
-                        <i class="fas fa-code mr-2"></i>
-                        جرب محرر الكود التفا��لي
-                    </button>
+
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
+                    <div class="prose max-w-none">
+                        ${lessonContent}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-md hover:shadow-lg transition">
+                        <h4 class="text-xl font-bold text-green-800 mb-3 flex items-center gap-2">
+                            <i class="fas fa-code"></i>
+                            جرب بنفسك
+                        </h4>
+                        <p class="text-gray-700 mb-4">استخدم محرر الكود التفاعلي لتطبيق ما تعلمته</p>
+                        <button onclick="toggleCodeEditor()" class="btn-primary bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 w-full">
+                            <i class="fas fa-laptop-code mr-2"></i>
+                            افتح محرر الكود
+                        </button>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-md hover:shadow-lg transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3 flex items-center gap-2">
+                            <i class="fas fa-clipboard-check"></i>
+                            التقدم
+                        </h4>
+                        <p class="text-gray-700 mb-4">تتبع تقدمك في هذا الدرس</p>
+                        <button onclick="markComplete('${lesson.id}')" class="btn-primary bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 w-full">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            إتمام الدرس
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 border-r-4 border-yellow-500 p-6 rounded-lg">
+                    <h4 class="font-bold text-yellow-800 mb-2 flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-xl"></i>
+                        نصيحة مهمة
+                    </h4>
+                    <p class="text-yellow-700">تأكد من تطبيق التمارين العملية لتثبيت المعلومات. البرمجة تتطلب الممارسة المستمرة!</p>
                 </div>
             `;
+        }
+
+        function getLessonContent(lessonId) {
+            const lessonContents = {
+                // Frontend Lessons
+                'fe1': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">مقدمة في HTML</h3>
+                    <p class="text-lg text-gray-700 mb-4">HTML (HyperText Markup Language) هي لغة الترميز الأساسية لإنشاء صفحات الويب.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">ما ستتعلمه:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>البنية الأساسية لصفحة HTML</li>
+                            <li>العناصر والوسوم (Tags)</li>
+                            <li>السمات (Attributes)</li>
+                            <li>إنشاء قوائم وجداول</li>
+                            <li>إضافة روابط وصور</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-50 p-4 rounded-lg mb-4 border-r-4 border-purple-600">
+                        <h4 class="font-bold text-purple-800 mb-3">مثال بسيط:</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded overflow-x-auto"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ar"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;صفحتي الأولى&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;مرحباً بالعالم!&lt;/h1&gt;
+    &lt;p&gt;هذه أول صفحة HTML لي&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-800 mb-2">تمرين عملي:</h4>
+                        <p class="text-gray-700">جرب إنشاء صفحة HTML بسيطة تحتوي على عنوان وفقرة وقائمة باستخدام محرر الكود!</p>
+                    </div>
+                `,
+                'fe2': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">أساسيات CSS</h3>
+                    <p class="text-lg text-gray-700 mb-4">CSS (Cascading Style Sheets) تستخدم لتنسيق وتصميم صفحات HTML.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المواضيع الرئيسية:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>المحددات (Selectors)</li>
+                            <li>الألوان والخلفيات</li>
+                            <li>الخطوط والنصوص</li>
+                            <li>نموذج الصندوق (Box Model)</li>
+                            <li>Flexbox و Grid</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-50 p-4 rounded-lg mb-4 border-r-4 border-purple-600">
+                        <h4 class="font-bold text-purple-800 mb-3">مثال CSS:</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded overflow-x-auto"><code>body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin: 20px 0;
+}</code></pre>
+                    </div>
+                `,
+                'fe3': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">JavaScript للمبتدئين</h3>
+                    <p class="text-lg text-gray-700 mb-4">JavaScript هي لغة البرمجة التي تجعل صفحات الويب تفاعلية.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">ما ستتعلمه:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>المتغيرات والثوابت</li>
+                            <li>أنواع البيانات</li>
+                            <li>الدوال (Functions)</li>
+                            <li>الشروط والحلقات</li>
+                            <li>التعامل مع الأحداث</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-50 p-4 rounded-lg mb-4 border-r-4 border-purple-600">
+                        <h4 class="font-bold text-purple-800 mb-3">مثال JavaScript:</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded overflow-x-auto"><code>// دالة بسيطة
+function greeting(name) {
+    console.log("مرحباً " + name + "!");
+}
+
+greeting("محمد");
+
+// حلقة تكرار
+for(let i = 1; i <= 5; i++) {
+    console.log("العدد: " + i);
+}</code></pre>
+                    </div>
+                `,
+                'fe4': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">DOM Manipulation</h3>
+                    <p class="text-lg text-gray-700 mb-4">تعلم كيفية التحكم في عناصر صفحة الويب ديناميكياً باستخدام JavaScript.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم الأساسية:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>اختيار العناصر (querySelector, getElementById)</li>
+                            <li>تعديل المحتوى والأنماط</li>
+                            <li>إضافة وحذف العناصر</li>
+                            <li>التعامل مع الأحداث (Events)</li>
+                            <li>تحريك العناصر</li>
+                        </ul>
+                    </div>
+                `,
+                'fe5': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">مقدمة في React</h3>
+                    <p class="text-lg text-gray-700 mb-4">React هي مكتبة JavaScript قوية لبناء واجهات المستخدم التفاعلية.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">ما ستتعلمه:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>المكونات (Components)</li>
+                            <li>JSX Syntax</li>
+                            <li>Props و State</li>
+                            <li>Hooks الأساسية</li>
+                            <li>بناء تطبيق بسيط</li>
+                        </ul>
+                    </div>
+                `,
+                // Backend Lessons
+                'be1': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">مقدمة في Node.js</h3>
+                    <p class="text-lg text-gray-700 mb-4">Node.js هي بيئة تشغيل JavaScript على السيرفر.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم الأساسية:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>إعداد بيئة Node.js</li>
+                            <li>نظام الموديولات</li>
+                            <li>NPM (Node Package Manager)</li>
+                            <li>Asynchronous Programming</li>
+                            <li>إنشاء سيرفر بسيط</li>
+                        </ul>
+                    </div>
+                `,
+                'be2': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Express Framework</h3>
+                    <p class="text-lg text-gray-700 mb-4">Express هو إطار عمل قوي وسريع لبناء تطبيقات الويب.</p>
+                    
+                    <div class="bg-purple-50 p-4 rounded-lg mb-4 border-r-4 border-purple-600">
+                        <h4 class="font-bold text-purple-800 mb-3">مثال Express:</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded overflow-x-auto"><code>const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('مرحباً بك في Express!');
+});
+
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
+});</code></pre>
+                    </div>
+                `,
+                'be3': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">قواعد البيانات MongoDB</h3>
+                    <p class="text-lg text-gray-700 mb-4">MongoDB هي قاعدة بيانات NoSQL مرنة وسهلة الاستخدام.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المواضيع:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>مقدمة في NoSQL</li>
+                            <li>CRUD Operations</li>
+                            <li>Mongoose ODM</li>
+                            <li>Schema Design</li>
+                            <li>الاستعلامات المتقدمة</li>
+                        </ul>
+                    </div>
+                `,
+                'be4': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">RESTful APIs</h3>
+                    <p class="text-lg text-gray-700 mb-4">تعلم كيفية بناء وتصميم APIs احترافية.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>مبادئ REST</li>
+                            <li>HTTP Methods</li>
+                            <li>Status Codes</li>
+                            <li>Authentication & Authorization</li>
+                            <li>API Documentation</li>
+                        </ul>
+                    </div>
+                `,
+                // AI Lessons
+                'ai1': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">مقدمة في الذكاء الاصطناعي</h3>
+                    <p class="text-lg text-gray-700 mb-4">الذكاء الاصطناعي هو محاكاة الذكاء البشري في الآلات.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المواضيع المطروحة:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>تاريخ الذكاء الاصطناعي</li>
+                            <li>أنواع الذكاء الاصطناعي</li>
+                            <li>تطبيقات الذكاء الاصطناعي</li>
+                            <li>Machine Learning vs Deep Learning</li>
+                            <li>مستقبل الذكاء الاصطناعي</li>
+                        </ul>
+                    </div>
+                `,
+                'ai2': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Python للذكاء الاصطناعي</h3>
+                    <p class="text-lg text-gray-700 mb-4">Python هي اللغة الأكثر شعبية في مجال الذكاء الاصطناعي.</p>
+                    
+                    <div class="bg-purple-50 p-4 rounded-lg mb-4 border-r-4 border-purple-600">
+                        <h4 class="font-bold text-purple-800 mb-3">مثال Python:</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded overflow-x-auto"><code>import numpy as np
+
+# إنشاء مصفوفة
+data = np.array([1, 2, 3, 4, 5])
+print(f"المتوسط: {np.mean(data)}")
+print(f"المجموع: {np.sum(data)}")</code></pre>
+                    </div>
+                `,
+                'ai3': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Machine Learning أساسيات</h3>
+                    <p class="text-lg text-gray-700 mb-4">تعلم أساسيات التعلم الآلي وخوارزمياته الأساسية.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المواضيع:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>Supervised Learning</li>
+                            <li>Unsupervised Learning</li>
+                            <li>Linear Regression</li>
+                            <li>Classification Algorithms</li>
+                            <li>Model Evaluation</li>
+                        </ul>
+                    </div>
+                `,
+                'ai4': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Neural Networks</h3>
+                    <p class="text-lg text-gray-700 mb-4">استكشف عالم الشبكات العصبية وكيفية عملها.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>Perceptron</li>
+                            <li>Activation Functions</li>
+                            <li>Backpropagation</li>
+                            <li>Deep Neural Networks</li>
+                            <li>CNN & RNN</li>
+                        </ul>
+                    </div>
+                `,
+                'ai5': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">TensorFlow وKeras</h3>
+                    <p class="text-lg text-gray-700 mb-4">تعلم استخدام أشهر مكتبات Deep Learning.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">ما ستتعلمه:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>تثبيت TensorFlow</li>
+                            <li>بناء نماذج بKeras</li>
+                            <li>Training & Testing</li>
+                            <li>تحسين النماذج</li>
+                            <li>بناء مشاريع عملية</li>
+                        </ul>
+                    </div>
+                `,
+                // Math Lessons
+                'ma1': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">الجبر الخطي</h3>
+                    <p class="text-lg text-gray-700 mb-4">الجبر الخطي أساسي لفهم خوارزميات الذكاء الاصطناعي.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم الأساسية:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>المتجهات (Vectors)</li>
+                            <li>المصفوفات (Matrices)</li>
+                            <li>العمليات على المصفوفات</li>
+                            <li>المحددات</li>
+                            <li>القيم والمتجهات الذاتية</li>
+                        </ul>
+                    </div>
+                `,
+                'ma2': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">حساب التفاضل والتكامل</h3>
+                    <p class="text-lg text-gray-700 mb-4">أساسيات التفاضل والتكامل للبرمجة والذكاء الاصطناعي.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المواضيع:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>المشتقات</li>
+                            <li>التفاضل الجزئي</li>
+                            <li>Gradient Descent</li>
+                            <li>التكامل</li>
+                            <li>تطبيقات في ML</li>
+                        </ul>
+                    </div>
+                `,
+                'ma3': `
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">الإحصاء والاحتمالات</h3>
+                    <p class="text-lg text-gray-700 mb-4">مفاهيم إحصائية أساسية لعلم البيانات والذكاء الاصطناعي.</p>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>نظرية الاحتمالات</li>
+                            <li>التوزيعات الاحتمالية</li>
+                            <li>المتوسط والانحراف المعياري</li>
+                            <li>الارتباط والتباين</li>
+                            <li>اختبار الفرضيات</li>
+                        </ul>
+                    </div>
+                `
+            };
+
+            return lessonContents[lessonId] || `
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">${lessonId}</h3>
+                <p class="text-lg text-gray-700 mb-4">محتوى هذا الدرس قيد الإعداد...</p>
+                <div class="bg-gray-100 p-6 rounded-lg text-center">
+                    <i class="fas fa-book-reader text-6xl text-gray-400 mb-4"></i>
+                    <p class="text-gray-600">سيتم إضافة المحتوى التفصيلي قريباً</p>
+                </div>
+            `;
+        }
+
+        function markComplete(lessonId) {
+            if (firebaseInitialized && currentUser) {
+                db.collection('users').doc(currentUser.uid).collection('progress').doc(lessonId).set({
+                    completed: true,
+                    completedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    showMessage('تم إتمام الدرس بنجاح! 🎉', 'green');
+                });
+            } else {
+                showMessage('تم وضع علامة إتمام للدرس ✓', 'blue');
+            }
         }
 
         function openModal(type) {
@@ -932,7 +1332,7 @@ for i in range(1, 6):
                 });
                 
                 closeModal('register');
-                showMessage(`مرحباً ${name}! تم ��نشاء حسابك بنجاح 🎉`, 'green');
+                showMessage(`مرحباً ${name}! تم إنشاء حسابك بنجاح 🎉`, 'green');
                 
                 setTimeout(() => {
                     document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
@@ -1076,8 +1476,5 @@ for i in range(1, 6):
             });
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b9d13589273d821',t:'MTc2NzcyMjAxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b9d77069680d821',t:'MTc2NzcyNjA5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
