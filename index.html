@@ -143,7 +143,7 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full">
-  <div id="app" class="w-full h-full flex flex-col overflow-auto"><!-- Firebase Setup Warning (س��ختفي بعد الربط) -->
+  <div id="app" class="w-full h-full flex flex-col overflow-auto"><!-- Firebase Setup Warning (سيختفي بعد الربط) -->
    <div id="firebaseWarning" class="firebase-warning" style="display: none;"><i class="fas fa-exclamation-triangle mr-2"></i> <strong>تنبيه:</strong> لم يتم ربط Firebase بعد! اضغط F12 لرؤية التعليمات
    </div><!-- Header -->
    <header class="w-full gradient-bg text-white shadow-lg">
@@ -177,7 +177,7 @@
      <section class="gradient-bg text-white py-16 md:py-24">
       <div class="container mx-auto px-4 text-center">
        <h2 id="heroTitle" class="text-3xl md:text-5xl font-bold mb-6">ابدأ رحلتك التعليمية معنا</h2>
-       <p id="heroDescription" class="text-lg md:text-xl mb-8 opacity-90">تعلم البرمجة والذكاء ال��صطناعي م�� أفضل المدربين</p><button onclick="openModal('register')" class="btn-primary px-8 py-4 bg-white text-purple-600 rounded-lg font-bold text-lg hover:bg-gray-100"> ابدأ التعلم الآن </button>
+       <p id="heroDescription" class="text-lg md:text-xl mb-8 opacity-90">تعلم البرمجة والذكاء الاصطناعي مع أفضل المدربين</p><button onclick="openModal('register')" class="btn-primary px-8 py-4 bg-white text-purple-600 rounded-lg font-bold text-lg hover:bg-gray-100"> ابدأ التعلم الآن </button>
       </div>
      </section><!-- Courses Section -->
      <section class="w-full py-16 bg-gray-50">
@@ -186,7 +186,7 @@
        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><!-- Frontend -->
         <div class="card-hover bg-white rounded-xl shadow-lg p-6 cursor-pointer" onclick="showCourse('frontend')">
          <div class="text-5xl mb-4">
-          ���
+          🎨
          </div>
          <h3 class="text-xl font-bold mb-3 text-gray-800">الفرونت اند</h3>
          <p class="text-gray-600 mb-4">تعلم HTML, CSS, JavaScript وReact</p><span class="text-purple-600 font-semibold">15 درس →</span>
@@ -210,7 +210,7 @@
           📊
          </div>
          <h3 class="text-xl font-bold mb-3 text-gray-800">علوم الرياضيات</h3>
-         <p class="text-gray-600 mb-4">��ساسيات الرياضيات للبرمجة</p><span class="text-purple-600 font-semibold">10 دروس →</span>
+         <p class="text-gray-600 mb-4">أساسيات الرياضيات للبرمجة</p><span class="text-purple-600 font-semibold">10 دروس →</span>
         </div>
        </div>
       </div>
@@ -232,7 +232,7 @@
        <form onsubmit="handleContact(event)">
         <div class="mb-6"><label for="contactName" class="block text-gray-700 font-semibold mb-2">الاسم</label> <input type="text" id="contactName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
         </div>
-        <div class="mb-6"><label for="contactEmail" class="block text-gray-700 font-semibold mb-2">البريد ا��إلكتروني</label> <input type="email" id="contactEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+        <div class="mb-6"><label for="contactEmail" class="block text-gray-700 font-semibold mb-2">البريد الإلكتروني</label> <input type="email" id="contactEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
         </div>
         <div class="mb-6"><label for="contactMessage" class="block text-gray-700 font-semibold mb-2">الرسالة</label> <textarea id="contactMessage" required rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"></textarea>
         </div><button type="submit" class="w-full btn-primary bg-purple-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-purple-700"> إرسال الرسالة </button>
@@ -288,7 +288,7 @@
         </div><!-- Code Tips -->
         <div class="bg-blue-50 border-t-4 border-blue-500 p-4">
          <h4 class="font-bold text-blue-800 mb-2 flex items-center"><i class="fas fa-info-circle ml-2"></i> <span id="tipTitle">نصائح البرمجة</span></h4>
-         <p id="codeTip" class="text-sm text-blue-700">ا��تر لغة برمجة وابدأ الكتابة!</p>
+         <p id="codeTip" class="text-sm text-blue-700">اختر لغة برمجة وابدأ الكتابة!</p>
         </div>
        </div>
       </div>
@@ -300,7 +300,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
        <div class="bg-white rounded-xl shadow-lg p-6">
         <h3 class="text-xl font-bold mb-2 text-gray-800">الدروس المكتملة</h3>
-        <p class="text-4xl font-bold text-green-600">23/57</p>
+        <p class="text-4xl font-bold text-green-600" id="completedLessonsCount">0/57</p>
        </div>
        <div class="bg-white rounded-xl shadow-lg p-6">
         <h3 class="text-xl font-bold mb-2 text-gray-800">ساعات التعلم</h3>
@@ -331,7 +331,7 @@
     <div class="container mx-auto px-4">
      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
       <div>
-       <p id="copyrightText" class="text-sm">© 2026 منصة التعليم الذكية - جميع الحقوق محفوظة</p>
+       <p id="copyrightText" class="text-sm">© 2024 منصة التعليم الذكية - جميع الحقوق محفوظة</p>
       </div>
       <div class="flex gap-6"><a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition"> <i class="fab fa-facebook text-2xl"></i> </a> <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition"> <i class="fab fa-twitter text-2xl"></i> </a> <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition"> <i class="fab fa-youtube text-2xl"></i> </a> <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition"> <i class="fab fa-linkedin text-2xl"></i> </a>
       </div>
@@ -469,7 +469,7 @@
             console.log('   • اذهب إلى: Firestore Database');
             console.log('   • اضغط "Create database"');
             console.log('   • اختر "Start in test mode" للبداية');
-            console.log('   • اختر المنطقة الأقرب ��ك');
+            console.log('   • اختر المنطقة الأقرب لك');
             console.log('');
             console.log('%c6️⃣ تفعيل Storage (اختياري):', 'color: #00BCD4; font-weight: bold;');
             console.log('   • اذهب إلى: Storage');
@@ -488,7 +488,7 @@
             console.log('     }');
             console.log('   }');
             console.log('');
-            console.log('%c══════════════════════════════���═══════════════════════════', 'color: #667eea; font-weight: bold;');
+            console.log('%c══════════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
             console.log('%c✨ بعد إتمام هذه الخطوات، سيعمل الموقع بشكل كامل!', 'color: #4CAF50; font-weight: bold; font-size: 14px;');
             console.log('%c══════════════════════════════════════════════════════════', 'color: #667eea; font-weight: bold;');
         }
@@ -505,31 +505,34 @@
             }
         }
 
+        // ============================================
+        // 📌 ضع روابط صفحات HTML للدروس هنا
+        // ============================================
         const courseLessons = {
             frontend: [
-                { id: 'fe1', title: 'مقدمة في HTML' },
-                { id: 'fe2', title: 'أساسيات CSS' },
-                { id: 'fe3', title: 'JavaScript للمبتدئين' },
-                { id: 'fe4', title: 'DOM Manipulation' },
-                { id: 'fe5', title: 'مقدمة في React' }
+                { id: 'fe1', title: 'مقدمة في HTML', url: '' }, // ضع الرابط هنا مثل: 'https://example.com/lesson1.html'
+                { id: 'fe2', title: 'أساسيات CSS', url: '' },
+                { id: 'fe3', title: 'JavaScript للمبتدئين', url: '' },
+                { id: 'fe4', title: 'DOM Manipulation', url: '' },
+                { id: 'fe5', title: 'مقدمة في React', url: '' }
             ],
             backend: [
-                { id: 'be1', title: 'مقدمة في Node.js' },
-                { id: 'be2', title: 'Express Framework' },
-                { id: 'be3', title: 'قواعد البيانات MongoDB' },
-                { id: 'be4', title: 'RESTful APIs' }
+                { id: 'be1', title: 'مقدمة في Node.js', url: '' },
+                { id: 'be2', title: 'Express Framework', url: '' },
+                { id: 'be3', title: 'قواعد البيانات MongoDB', url: '' },
+                { id: 'be4', title: 'RESTful APIs', url: '' }
             ],
             ai: [
-                { id: 'ai1', title: 'مقدمة في الذكاء الاصطناعي' },
-                { id: 'ai2', title: 'Python للذكاء الاصطناعي' },
-                { id: 'ai3', title: 'Machine Learning أساسيات' },
-                { id: 'ai4', title: 'Neural Networks' },
-                { id: 'ai5', title: 'TensorFlow وKeras' }
+                { id: 'ai1', title: 'مقدمة في الذكاء الاصطناعي', url: '' },
+                { id: 'ai2', title: 'Python للذكاء الاصطناعي', url: '' },
+                { id: 'ai3', title: 'Machine Learning أساسيات', url: '' },
+                { id: 'ai4', title: 'Neural Networks', url: '' },
+                { id: 'ai5', title: 'TensorFlow وKeras', url: '' }
             ],
             math: [
-                { id: 'ma1', title: 'المرحلة الابتدائية', url: './courses/maths/lesson1' },
-                { id: 'ma2', title: 'حساب التفاضل والتكامل' },
-                { id: 'ma3', title: 'الإحصاء والاحتمالات' }
+                { id: 'ma1', title: 'المرحلة الابتدائية', url: 'https://github.com/mohamed594261/edu/courses/maths/lesson1.html' }, // 📌 مثال
+                { id: 'ma2', title: 'حساب التفاضل والتكامل', url: '' },
+                { id: 'ma3', title: 'الإحصاء والاحتمالات', url: '' }
             ]
         };
 
@@ -543,7 +546,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>م��ال HTML</title>
+    <title>مثال HTML</title>
 </head>
 <body style="font-family: Arial; text-align: center; padding: 50px;">
     <h1 style="color: #667eea;">مرحباً بك في HTML!</h1>
@@ -594,7 +597,7 @@ print(result)
 # حساب مجموع الأعداد
 numbers = [1, 2, 3, 4, 5]
 total = sum(numbers)
-print(f"المجمو��: {total}")
+print(f"المجموع: {total}")
 
 # حلقة تكرار
 for i in range(1, 6):
@@ -776,7 +779,7 @@ for i in range(1, 6):
             document.getElementById('codeInput').value = codeExamples[currentLanguage];
             updateLineCount();
             
-            showMessage('تم تحميل الم��ال! اضغط تشغيل لرؤية النتيجة 🚀', 'blue');
+            showMessage('تم تحميل المثال! اضغط تشغيل لرؤية النتيجة 🚀', 'blue');
         }
 
         function clearOutput() {
@@ -841,6 +844,9 @@ for i in range(1, 6):
             const lessonsList = document.getElementById('lessonsList');
             lessonsList.innerHTML = '';
 
+            // تحميل حالة الإنجاز من Firebase
+            loadLessonCompletion(courseType, lessons);
+
             lessons.forEach((lesson, index) => {
                 const lessonDiv = document.createElement('div');
                 lessonDiv.className = 'course-card p-4 mb-3 rounded-lg cursor-pointer bg-white hover:shadow-md';
@@ -849,82 +855,308 @@ for i in range(1, 6):
                         <div class="bg-purple-100 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center font-bold">
                             ${index + 1}
                         </div>
-                        <div>
+                        <div class="flex-1">
                             <h4 class="font-semibold text-gray-800">${lesson.title}</h4>
                         </div>
+                        <div id="lesson-status-${lesson.id}" class="lesson-completion-badge"></div>
                     </div>
                 `;
-                lessonDiv.onclick = () => loadLesson(lesson);
+                lessonDiv.onclick = () => loadLesson(lesson, lessons, index, courseType);
                 lessonsList.appendChild(lessonDiv);
             });
         }
 
-        function loadLesson(lesson) {
+        async function loadLessonCompletion(courseType, lessons) {
+            if (!firebaseInitialized || !currentUser) return;
+            
+            try {
+                const progressDocs = await db.collection('users')
+                    .doc(currentUser.uid)
+                    .collection('progress')
+                    .where('courseType', '==', courseType)
+                    .get();
+                
+                const completedLessons = new Set();
+                progressDocs.forEach(doc => {
+                    if (doc.data().completed) {
+                        completedLessons.add(doc.id);
+                    }
+                });
+                
+                // تحديث علامات الإنجاز في القائمة
+                lessons.forEach(lesson => {
+                    const badge = document.getElementById(`lesson-status-${lesson.id}`);
+                    if (badge && completedLessons.has(lesson.id)) {
+                        badge.innerHTML = '<span class="text-green-500 text-xl">✓</span>';
+                    }
+                });
+            } catch (error) {
+                console.log('تعذر تحميل حالة الإنجاز:', error);
+            }
+        }
+
+        function loadLesson(lesson, allLessons, currentIndex, courseType) {
             const content = document.getElementById('courseContent');
             
-            // محتوى ت��ريبي للدروس
-            const lessonContent = getLessonContent(lesson.id);
-            
-            content.innerHTML = `
-                <div class="bg-gradient-to-r from-purple-50 to-blue-50 border-r-4 border-purple-500 p-6 rounded-lg mb-6 shadow-lg">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="bg-purple-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
-                            ${lesson.id.match(/\d+/)[0]}
+            // التحقق من وجود رابط خارجي
+            if (lesson.url && lesson.url.trim() !== '') {
+                // عرض الدرس من رابط خارجي في iframe
+                content.innerHTML = `
+                    <div class="bg-gradient-to-r from-purple-50 to-blue-50 border-r-4 border-purple-500 p-6 rounded-lg mb-6 shadow-lg">
+                        <div class="flex items-center justify-between gap-3 mb-4 flex-wrap">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-purple-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
+                                    ${currentIndex + 1}
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">${lesson.title}</h2>
+                                    <p class="text-gray-600 flex items-center gap-2 mt-1">
+                                        <i class="fas fa-book-open text-purple-600"></i>
+                                        <span>الآن تشاهد: ${lesson.title}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <button onclick="window.open('${lesson.url}', '_blank', 'noopener,noreferrer')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold transition flex items-center gap-2">
+                                <i class="fas fa-external-link-alt"></i>
+                                فتح في نافذة جديدة
+                            </button>
                         </div>
-                        <h2 class="text-3xl font-bold text-gray-800">${lesson.title}</h2>
+                        
+                        <!-- شريط التقدم -->
+                        <div class="bg-white p-3 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-semibold text-gray-600">التقدم في القسم</span>
+                                <span class="text-sm font-bold text-purple-600">${currentIndex + 1} / ${allLessons.length}</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-600 h-2 rounded-full transition-all" style="width: ${((currentIndex + 1) / allLessons.length * 100).toFixed(1)}%"></div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-gray-600 flex items-center gap-2">
-                        <i class="fas fa-book-open text-purple-600"></i>
-                        <span>الآن تشاهد: ${lesson.title}</span>
-                    </p>
-                </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
-                    <div class="prose max-w-none">
-                        ${lessonContent}
+                    <!-- إطار عرض الدرس -->
+                    <div class="bg-white rounded-lg shadow-lg mb-6 overflow-hidden" style="height: 600px;">
+                        <iframe 
+                            src="${lesson.url}" 
+                            class="w-full h-full border-0"
+                            title="${lesson.title}"
+                            sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                            loading="lazy"
+                        ></iframe>
                     </div>
-                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-md hover:shadow-lg transition">
-                        <h4 class="text-xl font-bold text-green-800 mb-3 flex items-center gap-2">
-                            <i class="fas fa-code"></i>
-                            جرب بنفسك
-                        </h4>
-                        <p class="text-gray-700 mb-4">استخدم محرر الكود التفاعلي لتطبيق ما تعلمته</p>
-                        <button onclick="toggleCodeEditor()" class="btn-primary bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 w-full">
-                            <i class="fas fa-laptop-code mr-2"></i>
-                            افتح محرر الكود
+                    <!-- أزرار التنقل والإتمام -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        ${currentIndex > 0 ? `
+                        <button onclick="loadLesson(courseLessons['${courseType}'][${currentIndex - 1}], courseLessons['${courseType}'], ${currentIndex - 1}, '${courseType}')" 
+                            class="btn-primary bg-gray-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-gray-700 flex items-center justify-center gap-2">
+                            <i class="fas fa-arrow-right"></i>
+                            الدرس السابق
                         </button>
-                    </div>
-
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-md hover:shadow-lg transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-3 flex items-center gap-2">
-                            <i class="fas fa-clipboard-check"></i>
-                            التقدم
-                        </h4>
-                        <p class="text-gray-700 mb-4">تتبع تقدمك في هذا الدرس</p>
-                        <button onclick="markComplete('${lesson.id}')" class="btn-primary bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 w-full">
-                            <i class="fas fa-check-circle mr-2"></i>
+                        ` : '<div></div>'}
+                        
+                        <button id="completeBtn-${lesson.id}" onclick="markComplete('${lesson.id}', '${courseType}', ${allLessons.length}, ${currentIndex + 1})" 
+                            class="btn-primary bg-green-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-green-700 flex items-center justify-center gap-2">
+                            <i class="fas fa-check-circle"></i>
                             إتمام الدرس
                         </button>
+                        
+                        ${currentIndex < allLessons.length - 1 ? `
+                        <button onclick="loadLesson(courseLessons['${courseType}'][${currentIndex + 1}], courseLessons['${courseType}'], ${currentIndex + 1}, '${courseType}')" 
+                            class="btn-primary bg-blue-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-blue-700 flex items-center justify-center gap-2">
+                            الدرس التالي
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        ` : '<div></div>'}
                     </div>
-                </div>
 
-                <div class="bg-yellow-50 border-r-4 border-yellow-500 p-6 rounded-lg">
-                    <h4 class="font-bold text-yellow-800 mb-2 flex items-center gap-2">
-                        <i class="fas fa-lightbulb text-xl"></i>
-                        نصيحة مهمة
-                    </h4>
-                    <p class="text-yellow-700">تأكد من تطبيق التمارين العملية لتثبيت المعلومات. البرمجة تتطلب الممارسة المستمرة!</p>
-                </div>
-            `;
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-md hover:shadow-lg transition">
+                            <h4 class="text-xl font-bold text-green-800 mb-3 flex items-center gap-2">
+                                <i class="fas fa-code"></i>
+                                جرب بنفسك
+                            </h4>
+                            <p class="text-gray-700 mb-4">استخدم محرر الكود التفاعلي لتطبيق ما تعلمته</p>
+                            <button onclick="toggleCodeEditor()" class="btn-primary bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 w-full">
+                                <i class="fas fa-laptop-code mr-2"></i>
+                                افتح محرر الكود
+                            </button>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 shadow-md hover:shadow-lg transition">
+                            <h4 class="text-xl font-bold text-purple-800 mb-3 flex items-center gap-2">
+                                <i class="fas fa-list"></i>
+                                قائمة الدروس
+                            </h4>
+                            <p class="text-gray-700 mb-4">تصفح جميع دروس هذا القسم</p>
+                            <button onclick="document.getElementById('lessonsList').scrollIntoView({behavior: 'smooth'})" class="btn-primary bg-purple-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-purple-700 w-full">
+                                <i class="fas fa-bars mr-2"></i>
+                                عرض القائمة
+                            </button>
+                        </div>
+                    </div>
+
+                    ${currentIndex === allLessons.length - 1 ? `
+                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 border-r-4 border-yellow-500 p-6 rounded-lg">
+                        <h4 class="font-bold text-yellow-800 mb-2 flex items-center gap-2 text-xl">
+                            <i class="fas fa-trophy text-2xl"></i>
+                            آخر درس في القسم!
+                        </h4>
+                        <p class="text-yellow-700 text-lg">أحسنت! هذا هو آخر درس في هذا القسم. اختر قسماً آخر من القائمة الجانبية لمتابعة التعلم 🎉</p>
+                    </div>
+                    ` : `
+                    <div class="bg-yellow-50 border-r-4 border-yellow-500 p-6 rounded-lg">
+                        <h4 class="font-bold text-yellow-800 mb-2 flex items-center gap-2">
+                            <i class="fas fa-lightbulb text-xl"></i>
+                            نصيحة مهمة
+                        </h4>
+                        <p class="text-yellow-700">تأكد من فهم الدرس جيداً قبل الانتقال للدرس التالي. يمكنك العودة لأي درس في أي وقت!</p>
+                    </div>
+                    `}
+                `;
+                
+                // التحقق من حالة الإنجاز
+                checkLessonCompletion(lesson.id);
+            } else {
+                // عرض المحتوى التجريبي الداخلي
+                const lessonContent = getLessonContent(lesson.id);
+                
+                content.innerHTML = `
+                    <div class="bg-gradient-to-r from-purple-50 to-blue-50 border-r-4 border-purple-500 p-6 rounded-lg mb-6 shadow-lg">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-purple-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
+                                ${currentIndex + 1}
+                            </div>
+                            <div>
+                                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">${lesson.title}</h2>
+                                <p class="text-gray-600 flex items-center gap-2 mt-1">
+                                    <i class="fas fa-book-open text-purple-600"></i>
+                                    <span>الآن تشاهد: ${lesson.title}</span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- شريط التقدم -->
+                        <div class="bg-white p-3 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-semibold text-gray-600">التقدم في القسم</span>
+                                <span class="text-sm font-bold text-purple-600">${currentIndex + 1} / ${allLessons.length}</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-600 h-2 rounded-full transition-all" style="width: ${((currentIndex + 1) / allLessons.length * 100).toFixed(1)}%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
+                        <div class="prose max-w-none">
+                            ${lessonContent}
+                        </div>
+                    </div>
+
+                    <!-- أزرار التنقل والإتمام -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        ${currentIndex > 0 ? `
+                        <button onclick="loadLesson(courseLessons['${courseType}'][${currentIndex - 1}], courseLessons['${courseType}'], ${currentIndex - 1}, '${courseType}')" 
+                            class="btn-primary bg-gray-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-gray-700 flex items-center justify-center gap-2">
+                            <i class="fas fa-arrow-right"></i>
+                            الدرس السابق
+                        </button>
+                        ` : '<div></div>'}
+                        
+                        <button id="completeBtn-${lesson.id}" onclick="markComplete('${lesson.id}', '${courseType}', ${allLessons.length}, ${currentIndex + 1})" 
+                            class="btn-primary bg-green-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-green-700 flex items-center justify-center gap-2">
+                            <i class="fas fa-check-circle"></i>
+                            إتمام الدرس
+                        </button>
+                        
+                        ${currentIndex < allLessons.length - 1 ? `
+                        <button onclick="loadLesson(courseLessons['${courseType}'][${currentIndex + 1}], courseLessons['${courseType}'], ${currentIndex + 1}, '${courseType}')" 
+                            class="btn-primary bg-blue-600 text-white px-6 py-4 rounded-lg font-bold hover:bg-blue-700 flex items-center justify-center gap-2">
+                            الدرس التالي
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        ` : '<div></div>'}
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-md hover:shadow-lg transition">
+                            <h4 class="text-xl font-bold text-green-800 mb-3 flex items-center gap-2">
+                                <i class="fas fa-code"></i>
+                                جرب بنفسك
+                            </h4>
+                            <p class="text-gray-700 mb-4">استخدم محرر الكود التفاعلي لتطبيق ما تعلمته</p>
+                            <button onclick="toggleCodeEditor()" class="btn-primary bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 w-full">
+                                <i class="fas fa-laptop-code mr-2"></i>
+                                افتح محرر الكود
+                            </button>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 shadow-md hover:shadow-lg transition">
+                            <h4 class="text-xl font-bold text-purple-800 mb-3 flex items-center gap-2">
+                                <i class="fas fa-list"></i>
+                                قائمة الدروس
+                            </h4>
+                            <p class="text-gray-700 mb-4">تصفح جميع دروس هذا القسم</p>
+                            <button onclick="document.getElementById('lessonsList').scrollIntoView({behavior: 'smooth'})" class="btn-primary bg-purple-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-purple-700 w-full">
+                                <i class="fas fa-bars mr-2"></i>
+                                عرض القائمة
+                            </button>
+                        </div>
+                    </div>
+
+                    ${currentIndex === allLessons.length - 1 ? `
+                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 border-r-4 border-yellow-500 p-6 rounded-lg">
+                        <h4 class="font-bold text-yellow-800 mb-2 flex items-center gap-2 text-xl">
+                            <i class="fas fa-trophy text-2xl"></i>
+                            آخر درس في القسم!
+                        </h4>
+                        <p class="text-yellow-700 text-lg">أحسنت! هذا هو آخر درس في هذا القسم. اختر قسماً آخر من القائمة الجانبية لمتابعة التعلم 🎉</p>
+                    </div>
+                    ` : `
+                    <div class="bg-yellow-50 border-r-4 border-yellow-500 p-6 rounded-lg">
+                        <h4 class="font-bold text-yellow-800 mb-2 flex items-center gap-2">
+                            <i class="fas fa-lightbulb text-xl"></i>
+                            نصيحة مهمة
+                        </h4>
+                        <p class="text-yellow-700">تأكد من فهم الدرس جيداً قبل الانتقال للدرس التالي. يمكنك العودة لأي درس في أي وقت!</p>
+                    </div>
+                    `}
+                `;
+                
+                // التحقق من حالة الإنجاز
+                checkLessonCompletion(lesson.id);
+            }
+        }
+
+        async function checkLessonCompletion(lessonId) {
+            if (!firebaseInitialized || !currentUser) return;
+            
+            try {
+                const doc = await db.collection('users')
+                    .doc(currentUser.uid)
+                    .collection('progress')
+                    .doc(lessonId)
+                    .get();
+                
+                if (doc.exists && doc.data().completed) {
+                    const btn = document.getElementById(`completeBtn-${lessonId}`);
+                    if (btn) {
+                        btn.innerHTML = '<i class="fas fa-check-circle"></i> تم الإنجاز ✓';
+                        btn.disabled = true;
+                        btn.classList.remove('hover:bg-green-700');
+                        btn.classList.add('opacity-75', 'cursor-not-allowed');
+                    }
+                }
+            } catch (error) {
+                console.log('تعذر التحقق من حالة الإنجاز:', error);
+            }
         }
 
         function getLessonContent(lessonId) {
             const lessonContents = {
-                // Frontend Lessons
-                'fe1': `
+                // المحتوى التجريبي للدروس (يبقى كما هو)
+'fe1': `
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">مقدمة في HTML</h3>
                     <p class="text-lg text-gray-700 mb-4">HTML (HyperText Markup Language) هي لغة الترميز الأساسية لإنشاء صفحات الويب.</p>
                     
@@ -932,9 +1164,9 @@ for i in range(1, 6):
                         <h4 class="font-bold text-gray-800 mb-2">ما ستتعلمه:</h4>
                         <ul class="list-disc list-inside text-gray-700 space-y-2">
                             <li>البنية الأساسية لصفحة HTML</li>
-                            <li>ال��ناصر والوسوم (Tags)</li>
+                            <li>العناصر والوسوم (Tags)</li>
                             <li>السمات (Attributes)</li>
-                            <li>إنشاء قوا��م وجداول</li>
+                            <li>إنشاء قوائم وجداول</li>
                             <li>إضافة روابط وصور</li>
                         </ul>
                     </div>
@@ -956,284 +1188,10 @@ for i in range(1, 6):
 
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h4 class="font-bold text-blue-800 mb-2">تمرين عملي:</h4>
-                        <p class="text-gray-700">��رب إنشاء صفحة HTML بسيطة تحتوي على عنوان وفقرة وقائمة باستخدام محرر الكود!</p>
+                        <p class="text-gray-700">جرب إنشاء صفحة HTML بسيطة تحتوي على عنوان وفقرة وقائمة باستخدام محرر الكود!</p>
                     </div>
                 `,
-                'fe2': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">أساسيات CSS</h3>
-                    <p class="text-lg text-gray-700 mb-4">CSS (Cascading Style Sheets) تستخدم لتنسيق وتصميم صفحات HTML.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المواضيع الرئيسية:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>المحددات (Selectors)</li>
-                            <li>الألوان والخلفيات</li>
-                            <li>الخطوط والنصوص</li>
-                            <li>نموذج الصندوق (Box Model)</li>
-                            <li>Flexbox و Grid</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-purple-50 p-4 rounded-lg mb-4 border-r-4 border-purple-600">
-                        <h4 class="font-bold text-purple-800 mb-3">مثال CSS:</h4>
-                        <pre class="bg-gray-900 text-green-400 p-4 rounded overflow-x-auto"><code>body {
-    font-family: 'Cairo', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-}
-
-h1 {
-    font-size: 2.5em;
-    text-align: center;
-    margin: 20px 0;
-}</code></pre>
-                    </div>
-                `,
-                'fe3': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">JavaScript للمبتدئين</h3>
-                    <p class="text-lg text-gray-700 mb-4">JavaScript هي لغة البرمجة التي تجعل صفحات الويب تفاعلية.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">ما ستتعلمه:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>المتغيرات والثوابت</li>
-                            <li>أنواع البيانات</li>
-                            <li>الدوال (Functions)</li>
-                            <li>الشروط والحلقات</li>
-                            <li>التعامل مع الأحداث</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-purple-50 p-4 rounded-lg mb-4 border-r-4 border-purple-600">
-                        <h4 class="font-bold text-purple-800 mb-3">مثال JavaScript:</h4>
-                        <pre class="bg-gray-900 text-green-400 p-4 rounded overflow-x-auto"><code>// دالة بسيطة
-function greeting(name) {
-    console.log("مرحباً " + name + "!");
-}
-
-greeting("محمد");
-
-// حلقة تكرار
-for(let i = 1; i <= 5; i++) {
-    console.log("ا��عدد: " + i);
-}</code></pre>
-                    </div>
-                `,
-                'fe4': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">DOM Manipulation</h3>
-                    <p class="text-lg text-gray-700 mb-4">تعلم كيفية التحكم في عناصر صفحة الويب ديناميكياً باستخدام JavaScript.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم الأساسية:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>اختيار العناصر (querySelector, getElementById)</li>
-                            <li>تعديل المحتوى والأنماط</li>
-                            <li>إضافة وحذف العناصر</li>
-                            <li>التعامل مع الأحداث (Events)</li>
-                            <li>تحريك العناصر</li>
-                        </ul>
-                    </div>
-                `,
-                'fe5': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">مقدمة في React</h3>
-                    <p class="text-lg text-gray-700 mb-4">React هي مكتبة JavaScript قوية لبناء واجهات المستخدم التفاعلية.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">ما ستتعلمه:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>المكونات (Components)</li>
-                            <li>JSX Syntax</li>
-                            <li>Props و State</li>
-                            <li>Hooks الأساسية</li>
-                            <li>بناء تطبيق بسيط</li>
-                        </ul>
-                    </div>
-                `,
-                // Backend Lessons
-                'be1': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">مقدمة في Node.js</h3>
-                    <p class="text-lg text-gray-700 mb-4">Node.js هي بيئة تشغيل JavaScript على السيرفر.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم الأساسية:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>إعداد بيئة Node.js</li>
-                            <li>نظام الموديولات</li>
-                            <li>NPM (Node Package Manager)</li>
-                            <li>Asynchronous Programming</li>
-                            <li>إنشاء سيرفر بسيط</li>
-                        </ul>
-                    </div>
-                `,
-                'be2': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Express Framework</h3>
-                    <p class="text-lg text-gray-700 mb-4">Express هو إطار عمل قوي وسريع لبناء تطبيقات الويب.</p>
-                    
-                    <div class="bg-purple-50 p-4 rounded-lg mb-4 border-r-4 border-purple-600">
-                        <h4 class="font-bold text-purple-800 mb-3">مثال Express:</h4>
-                        <pre class="bg-gray-900 text-green-400 p-4 rounded overflow-x-auto"><code>const express = require('express');
-const app = express();
-
-app.get('/', (req, res) => {
-    res.send('مرحباً بك في Express!');
-});
-
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
-});</code></pre>
-                    </div>
-                `,
-                'be3': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">قواعد البيانات MongoDB</h3>
-                    <p class="text-lg text-gray-700 mb-4">MongoDB هي قاعدة بيانات NoSQL مرنة وسهلة الاستخدام.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المواضيع:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>مقدمة في NoSQL</li>
-                            <li>CRUD Operations</li>
-                            <li>Mongoose ODM</li>
-                            <li>Schema Design</li>
-                            <li>الاستعلامات المتقدمة</li>
-                        </ul>
-                    </div>
-                `,
-                'be4': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">RESTful APIs</h3>
-                    <p class="text-lg text-gray-700 mb-4">تعلم كيفية بناء وتصميم APIs احترافية.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>مبادئ REST</li>
-                            <li>HTTP Methods</li>
-                            <li>Status Codes</li>
-                            <li>Authentication & Authorization</li>
-                            <li>API Documentation</li>
-                        </ul>
-                    </div>
-                `,
-                // AI Lessons
-                'ai1': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">مقدمة في الذكاء الاصطناعي</h3>
-                    <p class="text-lg text-gray-700 mb-4">الذكاء الاصطناعي هو محاكاة الذكاء البشري في الآلات.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المواضيع المطروحة:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>تاريخ الذكاء الاصطناعي</li>
-                            <li>أنواع الذكاء الاصطناعي</li>
-                            <li>تطبيقات الذكاء الاصطناعي</li>
-                            <li>Machine Learning vs Deep Learning</li>
-                            <li>مستقبل الذكاء الاصطناعي</li>
-                        </ul>
-                    </div>
-                `,
-                'ai2': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Python للذكاء الاصطناعي</h3>
-                    <p class="text-lg text-gray-700 mb-4">Python هي اللغة الأك��ر شعبية في مجال الذكاء الاصطناعي.</p>
-                    
-                    <div class="bg-purple-50 p-4 rounded-lg mb-4 border-r-4 border-purple-600">
-                        <h4 class="font-bold text-purple-800 mb-3">مثال Python:</h4>
-                        <pre class="bg-gray-900 text-green-400 p-4 rounded overflow-x-auto"><code>import numpy as np
-
-# إنشاء مصفوفة
-data = np.array([1, 2, 3, 4, 5])
-print(f"المتوسط: {np.mean(data)}")
-print(f"المجموع: {np.sum(data)}")</code></pre>
-                    </div>
-                `,
-                'ai3': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Machine Learning أساسيات</h3>
-                    <p class="text-lg text-gray-700 mb-4">تعلم أساسيات التعلم الآلي وخوارزمياته الأساسية.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المواضيع:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>Supervised Learning</li>
-                            <li>Unsupervised Learning</li>
-                            <li>Linear Regression</li>
-                            <li>Classification Algorithms</li>
-                            <li>Model Evaluation</li>
-                        </ul>
-                    </div>
-                `,
-                'ai4': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Neural Networks</h3>
-                    <p class="text-lg text-gray-700 mb-4">استكشف عالم الشبكات العصبية وكيفية عملها.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>Perceptron</li>
-                            <li>Activation Functions</li>
-                            <li>Backpropagation</li>
-                            <li>Deep Neural Networks</li>
-                            <li>CNN & RNN</li>
-                        </ul>
-                    </div>
-                `,
-                'ai5': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">TensorFlow وKeras</h3>
-                    <p class="text-lg text-gray-700 mb-4">تعلم استخدام أشهر مكتبات Deep Learning.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">ما ستتعلمه:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>تثبيت TensorFlow</li>
-                            <li>بناء نماذج بKeras</li>
-                            <li>Training & Testing</li>
-                            <li>تحسين النماذج</li>
-                            <li>بناء مشاريع عملية</li>
-                        </ul>
-                    </div>
-                `,
-                // Math Lessons
-                'ma1': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">الجبر الخطي</h3>
-                    <p class="text-lg text-gray-700 mb-4">الجبر الخطي أساسي لفهم خوارزميات الذكاء الاصطناعي.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم الأساسية:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>المتجهات (Vectors)</li>
-                            <li>المصفوفات (Matrices)</li>
-                            <li>العمليات على المصفوفات</li>
-                            <li>المحددات</li>
-                            <li>القيم والمتجهات الذاتية</li>
-                        </ul>
-                    </div>
-                `,
-                'ma2': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">حساب التفاضل والتكامل</h3>
-                    <p class="text-lg text-gray-700 mb-4">أساسيات التفاضل والتكامل للبرمجة والذكاء الاصطناعي.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المواضيع:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>المشتقات</li>
-                            <li>التفاضل الجزئي</li>
-                            <li>Gradient Descent</li>
-                            <li>التكامل</li>
-                            <li>تطبيقات في ML</li>
-                        </ul>
-                    </div>
-                `,
-                'ma3': `
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">��لإحصاء والاحتمالات</h3>
-                    <p class="text-lg text-gray-700 mb-4">مفاهيم إحصائية أساسية لعلم البيانات والذكاء الاصطناعي.</p>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                        <h4 class="font-bold text-gray-800 mb-2">المفاهيم:</h4>
-                        <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li>نظرية الاحتمالات</li>
-                            <li>التوزيعات الاحتمالية</li>
-                            <li>المتوسط والانحراف المعياري</li>
-                            <li>الارتباط والتباين</li>
-                            <li>اختبار الفرضيات</li>
-                        </ul>
-                    </div>
-                `
+// يمكنك إضافة المزيد من المحتوى هنا...
             };
 
             return lessonContents[lessonId] || `
@@ -1246,16 +1204,87 @@ print(f"المجموع: {np.sum(data)}")</code></pre>
             `;
         }
 
-        function markComplete(lessonId) {
+        async function markComplete(lessonId, courseType, totalLessons, currentLesson) {
+            const btn = document.getElementById(`completeBtn-${lessonId}`);
+            
             if (firebaseInitialized && currentUser) {
-                db.collection('users').doc(currentUser.uid).collection('progress').doc(lessonId).set({
-                    completed: true,
-                    completedAt: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => {
-                    showMessage('تم إتمام الدرس بنجاح! 🎉', 'green');
-                });
+                try {
+                    await db.collection('users').doc(currentUser.uid).collection('progress').doc(lessonId).set({
+                        completed: true,
+                        courseType: courseType,
+                        completedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    
+                    if (btn) {
+                        btn.innerHTML = '<i class="fas fa-check-circle"></i> تم الإنجاز ✓';
+                        btn.disabled = true;
+                        btn.classList.remove('hover:bg-green-700');
+                        btn.classList.add('opacity-75', 'cursor-not-allowed');
+                    }
+                    
+                    // تحديث علامة الإنجاز في القائمة الجانبية
+                    const badge = document.getElementById(`lesson-status-${lessonId}`);
+                    if (badge) {
+                        badge.innerHTML = '<span class="text-green-500 text-xl">✓</span>';
+                    }
+                    
+                    // إذا كان آخر درس في القسم
+                    if (currentLesson === totalLessons) {
+                        showMessage('🎉 تهانينا! لقد أنهيت جميع دروس هذا القسم!', 'purple');
+                    } else {
+                        showMessage('تم إتمام الدرس بنجاح! 🎉', 'green');
+                    }
+                    
+                    // تحديث إحصائيات لوحة التحكم
+                    await updateDashboardStats();
+                } catch (error) {
+                    showMessage('خطأ في حفظ التقدم: ' + error.message, 'red');
+                }
             } else {
-                showMessage('��م وضع علام�� إتمام للدرس ✓', 'blue');
+                if (btn) {
+                    btn.innerHTML = '<i class="fas fa-check-circle"></i> تم الإنجاز ✓';
+                    btn.disabled = true;
+                    btn.classList.add('opacity-75', 'cursor-not-allowed');
+                }
+                showMessage('تم وضع علامة إتمام للدرس ✓', 'blue');
+            }
+        }
+
+        async function updateDashboardStats() {
+            if (!firebaseInitialized || !currentUser) return;
+            
+            try {
+                const progressDocs = await db.collection('users')
+                    .doc(currentUser.uid)
+                    .collection('progress')
+                    .where('completed', '==', true)
+                    .get();
+                
+                const completedCount = progressDocs.size;
+                
+                // تحديث عدد الدروس المكتملة في لوحة التحكم
+                const statsElement = document.getElementById('completedLessonsCount');
+                if (statsElement) {
+                    statsElement.textContent = `${completedCount}/57`;
+                }
+            } catch (error) {
+                console.log('تعذر تحديث الإحصائيات:', error);
+            }
+        }
+
+        async function loadUserProgress() {
+            if (!firebaseInitialized || !currentUser) return;
+            
+            try {
+                const progressDocs = await db.collection('users')
+                    .doc(currentUser.uid)
+                    .collection('progress')
+                    .where('completed', '==', true)
+                    .get();
+                
+                console.log(`تم تحميل ${progressDocs.size} درس مكتمل`);
+            } catch (error) {
+                console.log('تعذر تحميل التقدم:', error);
             }
         }
 
@@ -1333,7 +1362,7 @@ print(f"المجموع: {np.sum(data)}")</code></pre>
                 });
                 
                 closeModal('register');
-                showMessage(`مرحباً ${name}! تم إنشاء حسابك ��نجاح 🎉`, 'green');
+                showMessage(`مرحباً ${name}! تم إنشاء حسابك بنجاح 🎉`, 'green');
                 
                 setTimeout(() => {
                     document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
@@ -1407,7 +1436,7 @@ print(f"المجموع: {np.sum(data)}")</code></pre>
                         message: message,
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
-                    showMessage('تم إرسال رس��لتك بنجاح! سنتواصل معك قريباً 📧', 'green');
+                    showMessage('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً 📧', 'green');
                 } catch (error) {
                     showMessage('تم استلام رسالتك (وضع محاكاة) ✓', 'blue');
                 }
@@ -1424,14 +1453,16 @@ print(f"المجموع: {np.sum(data)}")</code></pre>
             initializeFirebase();
             
             // تحميل التقدم إذا كان المستخدم مسجل دخول
-            auth.onAuthStateChanged((user) => {
-                currentUser = user;
-                updateUserUI(user);
-                if (user && firebaseInitialized) {
-                    loadUserProgress();
-                    updateDashboardStats();
-                }
-            });
+            if (auth) {
+                auth.onAuthStateChanged((user) => {
+                    currentUser = user;
+                    updateUserUI(user);
+                    if (user && firebaseInitialized) {
+                        loadUserProgress();
+                        updateDashboardStats();
+                    }
+                });
+            }
             
             // إعداد محرر الكود
             const codeInput = document.getElementById('codeInput');
@@ -1451,10 +1482,14 @@ print(f"المجموع: {np.sum(data)}")</code></pre>
             window.addEventListener('message', function(e) {
                 if (e.data.type === 'console') {
                     const consoleContent = document.getElementById('consoleContent');
-                    consoleContent.innerHTML += `<div class="text-green-400">>> ${e.data.data}</div>`;
+                    if (consoleContent) {
+                        consoleContent.innerHTML += `<div class="text-green-400">>> ${e.data.data}</div>`;
+                    }
                 } else if (e.data.type === 'error') {
                     const consoleContent = document.getElementById('consoleContent');
-                    consoleContent.innerHTML += `<div class="text-red-400">❌ خطأ: ${e.data.data}</div>`;
+                    if (consoleContent) {
+                        consoleContent.innerHTML += `<div class="text-red-400">❌ خطأ: ${e.data.data}</div>`;
+                    }
                 }
             });
         });
@@ -1487,6 +1522,5 @@ print(f"المجموع: {np.sum(data)}")</code></pre>
             });
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ba638fec6d29d86',t:'MTc2NzgxNzkyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ba66d6850bbe191',t:'MTc2NzgyMDA3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
