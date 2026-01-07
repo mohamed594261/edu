@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الدليل الشامل لتعلم HTML</title>
+</head>
+<body bgcolor="#f0f0f0">
+
+    <center>
+        <h1>الموسوعة التعليمية للغة HTML</h1>
+        <p><i>تعلم أساسيات هيكلة صفحات الويب في صفحة واحدة</i></p>
+        <hr size="3" color="black">
+    </center>
+
+    <h3>قائمة الدروس:</h3>
+    <ul>
+        <li><a href="#intro">ما هي لغة HTML؟</a></li>
+        <li><a href="#structure">الهيكل الأساسي للملف</a></li>
+        <li><a href="#tags">أهم الوسوم (Tags) واستخداماتها</a></li>
+        <li><a href="#lists">أنواع القوائم</a></li>
+        <li><a href="#forms">نماذج المدخلات (Forms)</a></li>
+    </ul>
+
+    <hr>
+
+    <h2 id="intro">1. ما هي لغة HTML؟</h2>
+    <p>
+        هي لغة ترميز النص التشعبي (HyperText Markup Language). ليست لغة برمجة بالمعنى التقليدي (لا تحتوي على منطق رياضي)، بل هي <b>لغة وصفية</b> تُخبر المتصفح كيف يوزع العناصر (نصوص، صور، جداول) داخل الصفحة.
+    </p>
+
+    <h2 id="structure">2. الهيكل الأساسي للملف</h2>
+    <p>كل صفحة ويب يجب أن تحتوي على هذه العناصر الثابتة:</p>
+    <pre>
+    &lt;!DOCTYPE html&gt;  &lt;!-- تعريف إصدار اللغة --&gt;
+    &lt;html&gt;           &lt;!-- بداية الصفحة --&gt;
+        &lt;head&gt;       &lt;!-- معلومات الصفحة (العنوان والترميز) --&gt;
+            &lt;title&gt;عنوان الصفحة&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;       &lt;!-- المحتوى الظاهر للمستخدم --&gt;
+            محتوى الصفحة هنا...
+        &lt;/body&gt;
+    &lt;/html&gt;
+    </pre>
+
+    <h2 id="tags">3. أهم الوسوم (Tags) واستخداماتها</h2>
+    <table border="1" width="100%" cellpadding="10">
+        <tr bgcolor="#cccccc">
+            <th>الوسم</th>
+            <th>الوظيفة</th>
+            <th>مثال</th>
+        </tr>
+        <tr>
+            <td>&lt;h1&gt; to &lt;h6&gt;</td>
+            <td>عناوين بأحجام مختلفة</td>
+            <td><h1>عنوان كبير</h1></td>
+        </tr>
+        <tr>
+            <td>&lt;p&gt;</td>
+            <td>كتابة فقرة نصية</td>
+            <td><p>هذا نص تجريبي للفقرة.</p></td>
+        </tr>
+        <tr>
+            <td>&lt;a&gt;</td>
+            <td>إضافة رابط تشعبي</td>
+            <td><a href="https://www.google.com">رابط لجوجل</a></td>
+        </tr>
+        <tr>
+            <td>&lt;img&gt;</td>
+            <td>إدراج صورة</td>
+            <td>وسم يطلب مصدر الصورة (src)</td>
+        </tr>
+    </table>
+
+    <h2 id="lists">4. أنواع القوائم</h2>
+    <table width="100%">
+        <tr>
+            <td>
+                <h3>قائمة غير مرتبة (Unordered)</h3>
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                </ul>
+            </td>
+            <td>
+                <h3>قائمة مرتبة (Ordered)</h3>
+                <ol>
+                    <li>تحميل محرر نصوص</li>
+                    <li>كتابة الكود</li>
+                    <li>فتح الملف بالمتصفح</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+
+    <h2 id="forms">5. نماذج المدخلات (Forms)</h2>
+    <p>تستخدم لجمع بيانات من المستخدم:</p>
+    
+    <fieldset>
+        <legend>بيانات التسجيل التجريبية</legend>
+        <form>
+            الاسم: <input type="text" placeholder="اكتب اسمك هنا">
+            <br><br>
+            البريد: <input type="email">
+            <br><br>
+            الجنس: 
+            <input type="radio" name="gender"> ذكر
+            <input type="radio" name="gender"> أنثى
+            <br><br>
+            المهارات:
+            <input type="checkbox"> برمجة
+            <input type="checkbox"> تصميم
+            <br><br>
+            <input type="submit" value="إرسال البيانات">
+            <input type="reset" value="مسح الحقول">
+        </form>
+    </fieldset>
+
+    <br>
+    <center>
+        <hr>
+        <p>تم إعداد هذا الدرس التعليمي بواسطة ذكاء اصطناعي - 2024</p>
+        <a href="#">العودة لأعلى الصفحة</a>
+    </center>
+
+</body>
+</html>
