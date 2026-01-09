@@ -2874,6 +2874,54 @@ for key, value in student.items():
       showNotification('تم طلب تغيير كلمة المرور...', 'info');
       // في تطبيق حقيقي، يمكنك استخدام firebase.auth().currentUser.updatePassword(newPass)
     }
+
+    //تحديث تعديل الفوتر ليكون مرنا مع المستخدم
+  
+  // وظيفة لإخفاء/إظهار الفوتر حسب موقع التمرير
+  function handleFooterVisibility() {
+    const footer = document.querySelector('footer');
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // إذا كان المستخدم في الأسفل، أظهر الفوتر
+    if (windowHeight + scrollTop >= documentHeight - 100) {
+      footer.style.opacity = '1';
+      footer.style.transform = 'translateY(0)';
+    } else {
+      footer.style.opacity = '0';
+      footer.style.transform = 'translateY(20px)';
+    }
+  }
+  
+  // إضافة الأنماط للفوتر المتحرك
+  const style = document.createElement('style');
+  style.textContent = `
+    footer {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    footer.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* تأكد من وجود مسافة كافية في الأسفل */
+    body {
+      padding-bottom: 100px;
+    }
+  `;
+  document.head.appendChild(style);
+  
+  // استدعاء الوظيفة عند التمرير
+  window.addEventListener('scroll', handleFooterVisibility);
+  window.addEventListener('resize', handleFooterVisibility);
+  
+  // تشغيل مرة عند التحميل
+  document.addEventListener('DOMContentLoaded', handleFooterVisibility);
+//نهاية تعديل الفوتر ليكون مرنا مع المحتوى
   </script>
 </body>
 </html>
