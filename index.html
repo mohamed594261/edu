@@ -18,11 +18,19 @@
     
     <!--بداية الاضافة لتعديل footer الثابت-->
   /* حل مشكلة الفوتر الثابت */
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
   body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+      display: flex;
+      flex-direction: column;
+      font-family: 'Cairo', sans-serif;
+      background: #f3f4f6;
+    }
   
   #app {
     flex: 1;
@@ -31,16 +39,19 @@
   }
   
   main {
-    flex: 1;
-  }
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 20px;
+    }
   
   /* الفوتر المرن */
-  footer {
-    background: #1f2937; /* bg-gray-900 */
-    color: white;
-    padding: 2rem 0; /* py-8 */
-    margin-top: auto; /* يدفعه للأسفل تلقائياً */
-  }
+   footer {
+      background: #1f2937;
+      color: white;
+      padding: 1rem;
+      margin-top: auto;
+      width: 100%;
+    }
   
   /* التأكد من أن iframe المحتوى لا يتأثر */
   iframe {
