@@ -16,61 +16,10 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
     
-    <!--بداية الاضافة لتعديل footer الثابت-->
-  /* حل مشكلة الفوتر الثابت */
-
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    
-  body {
-      display: flex;
-      flex-direction: column;
+    body {
       font-family: 'Cairo', sans-serif;
-      background: #f3f4f6;
+      overflow-x: hidden;
     }
-  
-  #app {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  main {
-      flex: 1;
-      overflow-y: auto;
-      padding-bottom: 20px;
-    }
-  
-  /* الفوتر المرن */
-   footer {
-      background: #1f2937;
-      color: white;
-      padding: 1rem;
-      margin-top: auto;
-      width: 100%;
-    }
-  
-  /* التأكد من أن iframe المحتوى لا يتأثر */
-  iframe {
-    display: auto;
-  }
-  
-  /* خاصية جديدة لضمان عدم تداخل المحتوى */
-  .content-container {
-    flex: 1;
-    min-height: 0; /* يسمح بالتمرير */
-    overflow: auto;
-  }
-  
-  /* حل مشكلة iframe داخل صفحة الدورة */
-  #courseContent iframe {
-    flex: 1;
-    min-height: 500px;
-  }
-<!-- نهاية الاضافة الاخيرة-->
     
     .gradient-bg {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -429,9 +378,6 @@
     
     <!-- المحتوى الرئيسي -->
     <main class="w-full flex-1 overflow-auto">
-
-      <!-- المحتوى الرئيسي -->
-<!--<main class="w-full flex-1 overflow-auto content-container">-->
       
       <!-- الصفحة الرئيسية -->
       <div id="homePage" class="page-content">
@@ -1148,73 +1094,72 @@
       </div>
     </main>
     
-   <!-- الفوتر المرن -->
-<footer class="w-full bg-gray-900 text-white py-8 relative z-10">
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-      <!-- محتوى الفوتر يبقى كما هو -->
-      <div>
-        <div class="flex items-center gap-3 mb-4">
-          <div class="bg-white rounded-lg p-2">
-            <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
-              <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" fill="#667eea" />
-              <circle cx="20" cy="20" r="6" fill="white" />
-            </svg>
+    <!-- الفوتر -->
+    <footer class="w-full bg-gray-900 text-white py-8 mt-auto">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-white rounded-lg p-2">
+                <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+                  <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" fill="#667eea" />
+                  <circle cx="20" cy="20" r="6" fill="white" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold">منصة التعليم الذكية</h3>
+            </div>
+            <p class="text-gray-400">منصة تعليمية شاملة تهدف إلى نشر العلم والمعرفة في جميع المجالات التقنية والعلمية.</p>
           </div>
-          <h3 class="text-xl font-bold">منصة التعليم الذكية</h3>
+          
+          <div>
+            <h4 class="text-lg font-bold mb-4">روابط سريعة</h4>
+            <ul class="space-y-2">
+              <li><a href="#" onclick="showPage('home')" class="text-gray-400 hover:text-white transition">الرئيسية</a></li>
+              <li><a href="#" onclick="showPage('courses')" class="text-gray-400 hover:text-white transition">الدورات</a></li>
+              <li><a href="#" onclick="showPage('about')" class="text-gray-400 hover:text-white transition">من نحن</a></li>
+              <li><a href="#" onclick="showPage('contact')" class="text-gray-400 hover:text-white transition">اتصل بنا</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-bold mb-4">الدورات</h4>
+            <ul class="space-y-2">
+              <li><a href="#" onclick="showCourse('frontend')" class="text-gray-400 hover:text-white transition">الواجهات الأمامية</a></li>
+              <li><a href="#" onclick="showCourse('backend')" class="text-gray-400 hover:text-white transition">الواجهات الخلفية</a></li>
+              <li><a href="#" onclick="showCourse('ai')" class="text-gray-400 hover:text-white transition">الذكاء الاصطناعي</a></li>
+              <li><a href="#" onclick="showCourse('design')" class="text-gray-400 hover:text-white transition">التصميم الجرافيكي</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-bold mb-4">تابعنا</h4>
+            <div class="flex gap-4">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
         </div>
-        <p class="text-gray-400">منصة تعليمية شاملة تهدف إلى نشر العلم والمعرفة في جميع المجالات التقنية والعلمية.</p>
-      </div>
-      
-      <div>
-        <h4 class="text-lg font-bold mb-4">روابط سريعة</h4>
-        <ul class="space-y-2">
-          <li><a href="#" onclick="showPage('home')" class="text-gray-400 hover:text-white transition">الرئيسية</a></li>
-          <li><a href="#" onclick="showPage('courses')" class="text-gray-400 hover:text-white transition">الدورات</a></li>
-          <li><a href="#" onclick="showPage('about')" class="text-gray-400 hover:text-white transition">من نحن</a></li>
-          <li><a href="#" onclick="showPage('contact')" class="text-gray-400 hover:text-white transition">اتصل بنا</a></li>
-        </ul>
-      </div>
-      
-      <div>
-        <h4 class="text-lg font-bold mb-4">الدورات</h4>
-        <ul class="space-y-2">
-          <li><a href="#" onclick="showCourse('frontend')" class="text-gray-400 hover:text-white transition">الواجهات الأمامية</a></li>
-          <li><a href="#" onclick="showCourse('backend')" class="text-gray-400 hover:text-white transition">الواجهات الخلفية</a></li>
-          <li><a href="#" onclick="showCourse('ai')" class="text-gray-400 hover:text-white transition">الذكاء الاصطناعي</a></li>
-          <li><a href="#" onclick="showCourse('design')" class="text-gray-400 hover:text-white transition">التصميم الجرافيكي</a></li>
-        </ul>
-      </div>
-      
-      <div>
-        <h4 class="text-lg font-bold mb-4">تابعنا</h4>
-        <div class="flex gap-4">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition">
-            <i class="fab fa-youtube"></i>
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
+        
+        <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p id="copyrightText" class="text-sm text-gray-500">© 2024 منصة التعليم الذكية - جميع الحقوق محفوظة</p>
+          <div class="flex gap-6">
+            <a href="#" class="text-sm text-gray-500 hover:text-white">سياسة الخصوصية</a>
+            <a href="#" class="text-sm text-gray-500 hover:text-white">شروط الاستخدام</a>
+            <a href="#" class="text-sm text-gray-500 hover:text-white">الأسئلة الشائعة</a>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p id="copyrightText" class="text-sm text-gray-500">© 2024 منصة التعليم الذكية - جميع الحقوق محفوظة</p>
-      <div class="flex gap-6">
-        <a href="#" class="text-sm text-gray-500 hover:text-white">سياسة الخصوصية</a>
-        <a href="#" class="text-sm text-gray-500 hover:text-white">شروط الاستخدام</a>
-        <a href="#" class="text-sm text-gray-500 hover:text-white">الأسئلة الشائعة</a>
-      </div>
-    </div>
-  </div>
-</footer>
+    </footer>
     
     <!-- نماذج الدخول والتسجيل -->
     
@@ -2885,54 +2830,6 @@ for key, value in student.items():
       showNotification('تم طلب تغيير كلمة المرور...', 'info');
       // في تطبيق حقيقي، يمكنك استخدام firebase.auth().currentUser.updatePassword(newPass)
     }
-
-    //تحديث تعديل الفوتر ليكون مرنا مع المستخدم
-  
-  // وظيفة لإخفاء/إظهار الفوتر حسب موقع التمرير
-  function handleFooterVisibility() {
-    const footer = document.querySelector('footer');
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // إذا كان المستخدم في الأسفل، أظهر الفوتر
-    if (windowHeight + scrollTop >= documentHeight - 100) {
-      footer.style.opacity = '1';
-      footer.style.transform = 'translateY(0)';
-    } else {
-      footer.style.opacity = '0';
-      footer.style.transform = 'translateY(20px)';
-    }
-  }
-  
-  // إضافة الأنماط للفوتر المتحرك
-  const style = document.createElement('style');
-  style.textContent = `
-    footer {
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    
-    footer.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* تأكد من وجود مسافة كافية في الأسفل */
-    body {
-      padding-bottom: 100px;
-    }
-  `;
-  document.head.appendChild(style);
-  
-  // استدعاء الوظيفة عند التمرير
-  window.addEventListener('scroll', handleFooterVisibility);
-  window.addEventListener('resize', handleFooterVisibility);
-  
-  // تشغيل مرة عند التحميل
-  document.addEventListener('DOMContentLoaded', handleFooterVisibility);
-//نهاية تعديل الفوتر ليكون مرنا مع المحتوى
   </script>
 </body>
 </html>
